@@ -80,7 +80,7 @@ public class LoginSub extends javax.swing.JFrame {
 
         lbmail.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
         lbmail.setForeground(new java.awt.Color(196, 205, 216));
-        lbmail.setText("이메일 주소");
+        lbmail.setText("이름");
         lbmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
         tfpw.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -233,7 +233,7 @@ public class LoginSub extends javax.swing.JFrame {
 		// [4] DAO 쿼리에 입력 : id pw 일치 확인
     	// int dao = dao.AddLogin(bv);
     	// " INSERT INTO MEMBER values(MEMBER_seq.nextval,'name',1234, '홍길동', 1); "
-    	JOptionPane.showMessageDialog(this, "INSERT INTO MEMBER values(MEMBER_seq.nextval, ID, PW, NAME, 1);");
+    	JOptionPane.showMessageDialog(this, "INSERT INTO MEMBER values(seq_MEMBER.nextval, ID, PW, NAME, 1);");
 		// [5] 회원가입 완료 창닫기 로그인화면 전환
     	JOptionPane.showMessageDialog(this, "UPDATE DB !! ");
     	this.setVisible(false);

@@ -1,6 +1,8 @@
 package BoardUi;
 
 import java.awt.CardLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 
@@ -22,7 +24,7 @@ public class BoardList extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+    	
         jPanel2 = new javax.swing.JPanel();
         pbList = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -47,6 +49,18 @@ public class BoardList extends javax.swing.JFrame {
         tades1 = new javax.swing.JTextArea();
         lbtitle1 = new javax.swing.JLabel();
         btReturn2 = new javax.swing.JButton();
+        // 글목록을 클릭하면 글 본문창으로 이동
+        jTable1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+        		int row = jTable1.getSelectedRow();
+        		//글번호 가져오기
+        		Object idx = jTable1.getValueAt(row,0);
+        		Integer idx2 = (Integer) idx;
+        		// 본문 로드
+        		card.show(jPanel2,"V");
+        	}
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -355,7 +369,9 @@ public class BoardList extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>      
+    
+    
     // 글쓰기 창으로 가는 버튼
     private void btCreateActionPerformed(java.awt.event.ActionEvent evt) {                                         
         
