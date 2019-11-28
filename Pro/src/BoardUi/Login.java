@@ -190,9 +190,10 @@ public class Login extends javax.swing.JFrame {
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {
     	JOptionPane.showMessageDialog(this, "BoardVO bv = new BoardVO(idx, id, pw)");
     	JOptionPane.showMessageDialog(this, "int dao = dao.Login(bv)");
-    	//[1] id, pw 가져오기
+    	//[1] id, pw, 가져오기
     	String id = tfid.getText();
 		String pw = tfpw.getText();
+		
 		// [2] id, pw 유효성 확인
 		if (id == null || pw == null) {
 			JOptionPane.showMessageDialog(this, "아이디와 비밀번호를 입력하세요");

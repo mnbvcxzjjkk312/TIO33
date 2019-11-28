@@ -214,23 +214,26 @@ public class LoginSub extends javax.swing.JFrame {
 		this.dispose();
     }         
     private void btsignActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "BoardVO bv = new BoardVO(idx, id, pw)");
+    	JOptionPane.showMessageDialog(this, "BoardVO bv = new BoardVO(idx, id, pw, name)");
     	JOptionPane.showMessageDialog(this, "int dao = dao.AddLogin(bv)");
     	//[1] id, pw 가져오기
     	String id = tfid.getText();
     	String pw = tfpw.getText();
-    	
+    	String name = tfmail.getText();
     	// [2] 공백 유효성 검사
-    	if (id == null || pw == null) {
+    	if (id == null || pw == null || name == null) {
 			JOptionPane.showMessageDialog(this, "아이디와 비밀번호를 확인하세요");
 			tfid.requestFocus();
 			return;
 		}
         // [3] VO 불러오기
-    	
+    	// BoardVO bv = new BoardVO(MEMBER_NO, id, pw, name, 1);
+    	// 
     	
 		// [4] DAO 쿼리에 입력 : id pw 일치 확인
-    	JOptionPane.showMessageDialog(this, "UPDATE COLUMN !! ");
+    	// int dao = dao.AddLogin(bv);
+    	// " INSERT INTO MEMBER values(MEMBER_seq.nextval,'name',1234, '홍길동', 1); "
+    	JOptionPane.showMessageDialog(this, "INSERT INTO MEMBER values(MEMBER_seq.nextval, ID, PW, NAME, 1);");
 		// [5] 회원가입 완료 창닫기 로그인화면 전환
     	JOptionPane.showMessageDialog(this, "UPDATE DB !! ");
     	this.setVisible(false);
