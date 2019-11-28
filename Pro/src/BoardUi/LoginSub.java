@@ -188,8 +188,23 @@ public class LoginSub extends javax.swing.JFrame {
         pack();
     }// </editor-fold>   
     
-    private void btidActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "tfid.getText => DB에 있음?");
+    private void btidActionPerformed(java.awt.event.ActionEvent evt) {                                     
+    	JOptionPane.showMessageDialog(this, "BoardVO bv = new BoardVO(idx, id)");
+    	JOptionPane.showMessageDialog(this, "int dao = dao.Login(bv)");
+    	//[1] id 가져오기
+    	String id = tfid.getText();
+    	// [2] VO 불러와서 값 넣어주기
+		
+        // [3] DAO 쿼리에 입력 : id pw 일치 확인
+		// [4] id 중복검사 실행
+		if (id == null) {
+			JOptionPane.showMessageDialog(this, "중복된 아이디입니다.");
+			tfid.requestFocus();
+			return;
+		}
+		
+		// [5] 회원가입 진행
+		
     	JOptionPane.showMessageDialog(this, "DB => true || false ");
     }       
     
@@ -199,8 +214,27 @@ public class LoginSub extends javax.swing.JFrame {
 		this.dispose();
     }         
     private void btsignActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
+    	JOptionPane.showMessageDialog(this, "BoardVO bv = new BoardVO(idx, id, pw)");
+    	JOptionPane.showMessageDialog(this, "int dao = dao.AddLogin(bv)");
+    	//[1] id, pw 가져오기
+    	String id = tfid.getText();
+    	String pw = tfpw.getText();
+    	
+    	// [2] 공백 유효성 검사
+    	if (id == null || pw == null) {
+			JOptionPane.showMessageDialog(this, "아이디와 비밀번호를 확인하세요");
+			tfid.requestFocus();
+			return;
+		}
+        // [3] VO 불러오기
+    	
+    	
+		// [4] DAO 쿼리에 입력 : id pw 일치 확인
+    	JOptionPane.showMessageDialog(this, "UPDATE COLUMN !! ");
+		// [5] 회원가입 완료 창닫기 로그인화면 전환
     	JOptionPane.showMessageDialog(this, "UPDATE DB !! ");
+    	this.setVisible(false);
+		this.dispose();
     }                                      
 
     public static void main(String args[]) {

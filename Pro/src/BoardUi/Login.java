@@ -188,13 +188,27 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>
     
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {
-    	JOptionPane.showMessageDialog(this, "아이디 검사 코드 실행!");
-    	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
-    	JOptionPane.showMessageDialog(this, "DB => true || false ");
-    	
+    	JOptionPane.showMessageDialog(this, "BoardVO bv = new BoardVO(idx, id, pw)");
+    	JOptionPane.showMessageDialog(this, "int dao = dao.Login(bv)");
+    	//[1] id, pw 가져오기
+    	String id = tfid.getText();
+		String pw = tfpw.getText();
+		// [2] id, pw 유효성 확인
+		if (id == null || pw == null) {
+			JOptionPane.showMessageDialog(this, "아이디와 비밀번호를 입력하세요");
+			tfid.requestFocus();
+			return;
+		}
+    	// [3] VO 불러와서 값 넣어주기
+		
+		// [4] DAO 쿼리에 입력 : id pw 일치 확인
+		
+		// [5] 게시판 화면 로드
 		bl.pack();
 		bl.setLocation(500, 0);
 		bl.setVisible(true);
+		
+		// [6] 로그인창 닫기
 		this.setVisible(false);
 		this.dispose();
 	}
