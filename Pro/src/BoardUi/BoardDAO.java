@@ -28,5 +28,14 @@ public class BoardDAO {
 		}
 	}//--------------------------------------
 	
+	private void close() {
+		try {
+			if(rs!=null) rs.close();
+			if(ps!=null) ps.close();
+			if(con!=null) con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	
 }
