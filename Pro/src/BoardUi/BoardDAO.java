@@ -3,6 +3,8 @@ package BoardUi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class BoardDAO
 {
@@ -10,10 +12,60 @@ public class BoardDAO
 	PreparedStatement ps;
 	ResultSet rs;
 	
+	// 리스트 창에서 글 목록을 생성해 주는 메서드.
+	public ArrayList<BoardVO> makeList()
+	{
+		try
+		{
+			con = DBConnection.getCon();
+			String sql = "select Boardnum, title, content, id wdate";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<BoardVO> arr = getList(rs);
+			return arr;
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		finally
+		{
+			close();
+		}
+	}
+	
+	// DB에서 ROW를 가져오는 메서드.
+	public ArrayList<BoardVO> getList(ResultSet rs) throws SQLException
+	{
+		ArrayList<BoardVO> bvoArr = new ArrayList();
+		while(rs.next())
+		{
+			BoardVO bvoTemp = new BoardVO(rs.getInt("Boardnum"), rs.getString("title"), rs.getString("content"), rs.getString("id"), rs.getDate("wdate"));
+			bvoArr.add(bvoTemp);
+		}
+		return bvoArr;
+	}
+
+	// 글 목록에서 글을 선택하면 본문이 열리는 메서드.
+	public int selectTopic()
+	{
+		try
+		{
+			int row = bl.jTable1.getSelectRow();
+			
+			Object objBoardnum = jTalbe1.getValueAt(row, 0);
+			Integer Boardnum = (Integer) objBoardnum;
+		} 
+		catch (Exception e)
+		{
+			
+		}
+		return 0;
+	}
 	
 	
-	
-	
+	// 글 목록에서 글을 지우는 메서드.
 	public int delete(Integer boardnum)
 	{
 		try
@@ -37,7 +89,7 @@ public class BoardDAO
 	}
 	
 	
-	
+	// DB로의 접속을 종료하는 메서드.
 	private void close()
 	{
 		try
