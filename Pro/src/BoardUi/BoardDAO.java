@@ -53,7 +53,6 @@ public class BoardDAO
 		try
 		{
 			int row = bl.jTable1.getSelectRow();
-			
 			Object objBoardnum = jTalbe1.getValueAt(row, 0);
 			Integer Boardnum = (Integer) objBoardnum;
 		} 
