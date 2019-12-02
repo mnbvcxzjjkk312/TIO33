@@ -105,9 +105,9 @@ public class BoardList extends javax.swing.JFrame {
 			Object objIdx = jTable1.getValueAt(row,0);
 			Integer idx = (Integer) objIdx;
 			// 패널 전환 후 글 로드
-			card.show(jPanel2,"L");		
-			// tftitle.append();
-			// tades.append(str);
+			card.show(jPanel2,"V");		
+			//tftitle.append(idx);
+			//tades.append(str1);
 			
 			}
 			
