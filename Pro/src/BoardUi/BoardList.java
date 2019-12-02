@@ -2,17 +2,19 @@ package BoardUi;
 
 import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import boardvo.*;
+import memvo.*;
 
 public class BoardList extends javax.swing.JFrame {
 
-    CardLayout card;
-    Login main;
-    
-    public BoardList(Login main) {
+	CardLayout card;
+	Login main;
+
+	public BoardList(Login main) {
         initComponents();
         this.main=main;
         card=(CardLayout)this.jPanel2.getLayout();
@@ -22,7 +24,7 @@ public class BoardList extends javax.swing.JFrame {
        
     }
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
@@ -90,8 +92,12 @@ public class BoardList extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(400);
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(120);
+		
 		//마우스 클릭시 본문이동
 		jTable1.addMouseListener(new MouseAdapter(){
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
 			//1 마우스로 누른 지점의 글 번호
 			int row = jTable1.getSelectedRow();
 			
@@ -99,11 +105,13 @@ public class BoardList extends javax.swing.JFrame {
 			Object objIdx = jTable1.getValueAt(row,0);
 			Integer idx = (Integer) objIdx;
 			// 패널 전환 후 글 로드
-			public void view(Integer idx) {
-			card.show(jPanel2,"L");
-			int a;
+			card.show(jPanel2,"L");		
+			// tftitle.append();
+			// tades.append(str);
+			
 			}
-		});
+			
+		 });
 
         btCreate.setBackground(new java.awt.Color(58, 62, 70));
         btCreate.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
