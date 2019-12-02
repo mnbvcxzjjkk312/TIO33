@@ -98,7 +98,11 @@ public class BoardList extends javax.swing.JFrame {
 			// 선택한 글번호 가져오기
 			Object objIdx = jTable1.getValueAt(row,0);
 			Integer idx = (Integer) objIdx;
+			// 패널 전환 후 글 로드
+			public void view(Integer idx) {
+			card.show(jPanel2,"L");
 			
+			}
 		});
 
         btCreate.setBackground(new java.awt.Color(58, 62, 70));
