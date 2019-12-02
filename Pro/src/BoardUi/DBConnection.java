@@ -1,13 +1,12 @@
 package BoardUi;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+
 
 public class DBConnection
 {
-	static String url = "jdbc:oracle:thin:@192.168.0.94:1521:XE";
-	static String user = "project3", pwd = "Abcd1234";
+	static String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	static String user = "project3", pwd = "1234";
 	
 	static
 	{
@@ -25,7 +24,7 @@ public class DBConnection
 	
 	public static Connection getCon() throws SQLException
 	{
-		Connection con = DriverManager.getConnection(url);
+		Connection con = DriverManager.getConnection(url, user, pwd);
 		return con;
 	}
 }
