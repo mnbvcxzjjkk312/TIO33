@@ -30,4 +30,4 @@ public class MainUi extends JFrame {
 		mu.setVisible(false);
 	}
 
-}
+};
