@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import boardvo.*;
 import memvo.*;
 
@@ -52,6 +53,7 @@ public class BoardList extends javax.swing.JFrame {
         tades1 = new javax.swing.JTextArea();
         lbtitle1 = new javax.swing.JLabel();
         btReturn2 = new javax.swing.JButton();
+        btDel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,10 +107,15 @@ public class BoardList extends javax.swing.JFrame {
 			Object objIdx = jTable1.getValueAt(row,0);
 			Integer idx = (Integer) objIdx;
 			// 패널 전환 후 글 로드
-			card.show(jPanel2,"L");		
-			// tftitle.append();
-			// tades.append(str);
 			
+			ArrayList<BoardVO> arr = dao.clickContent(idx);
+			if(arr!=null&&arr.size()==1) {
+				BoardVO b=arr.get(0);
+				tftitle.setText(b.getTitle());
+				tades.setText(b.getContent());
+			}
+			card.show(jPanel2,"V");
+
 			}
 			
 		 });
@@ -212,6 +219,16 @@ public class BoardList extends javax.swing.JFrame {
         btReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btReturnActionPerformed(evt);
+            }
+        });
+        
+        btDel.setBackground(new java.awt.Color(58, 62, 70));
+        btDel.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        btDel.setForeground(new java.awt.Color(196, 205, 216));
+        btDel.setText("글 삭제");
+        btDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDelActionPerformed(evt);
             }
         });
 
@@ -339,6 +356,8 @@ public class BoardList extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
                             .addGroup(pbViewLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -361,9 +380,10 @@ public class BoardList extends javax.swing.JFrame {
                 .addComponent(p3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap())
             .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pbViewLayout.createSequentialGroup()
                     .addGap(29, 29, 29)
@@ -408,7 +428,10 @@ public class BoardList extends javax.swing.JFrame {
     private void btReActionPerformed(java.awt.event.ActionEvent evt) {                                     
         // TODO add your handling code here:
     }                     
-    // 
+    // 글 본문 창에서 글 삭제 버튼
+    private void btDelActionPerformed(java.awt.event.ActionEvent evt) {                                      
+    	
+    }
     
     // 글 본문에서 글목록 이동버튼
     private void btReturn2ActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -461,6 +484,7 @@ public class BoardList extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton btCreate;
     private javax.swing.JButton btRe;
+    private javax.swing.JButton btDel;
     private javax.swing.JButton btReturn;
     private javax.swing.JButton btReturn2;
     private javax.swing.JButton btSub;
