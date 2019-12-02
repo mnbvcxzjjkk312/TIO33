@@ -88,7 +88,7 @@ public class BoardDAO
 		}
 	}
 	
-	// 글 본문에서 글을 지우는 메서드.
+	// 글 본문에서 글을 수정하는 메서드.
 		public int update (BoardVO vo)
 		{
 			try
