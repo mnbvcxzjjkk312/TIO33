@@ -12,6 +12,8 @@ public class BoardDAO
 	PreparedStatement ps;
 	ResultSet rs;
 	
+	int xc;
+	
 	// 리스트 창에서 글 목록을 생성해 주는 메서드.
 	public ArrayList<BoardVO> makeList()
 	{
