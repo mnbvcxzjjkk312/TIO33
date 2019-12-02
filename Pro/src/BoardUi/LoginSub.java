@@ -20,7 +20,7 @@ public class LoginSub extends javax.swing.JFrame {
         lbpw = new javax.swing.JLabel();
         lbicon = new javax.swing.JLabel();
         btid = new javax.swing.JButton();
-        tfmail = new javax.swing.JTextField();
+        tfname = new javax.swing.JTextField();
         lbmail = new javax.swing.JLabel();
         tfpw = new javax.swing.JTextField();
         lbtitle = new javax.swing.JLabel();
@@ -76,7 +76,7 @@ public class LoginSub extends javax.swing.JFrame {
             }
         });
 
-        tfmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        tfname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         lbmail.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
         lbmail.setForeground(new java.awt.Color(196, 205, 216));
@@ -125,7 +125,7 @@ public class LoginSub extends javax.swing.JFrame {
                     .addGroup(p1Layout.createSequentialGroup()
                         .addComponent(lbmail, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfmail, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfname, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -133,7 +133,7 @@ public class LoginSub extends javax.swing.JFrame {
 
         p1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btcancel, btsign});
 
-        p1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfid, tfmail, tfpw});
+        p1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfid, tfname, tfpw});
 
         p1Layout.setVerticalGroup(
             p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +160,7 @@ public class LoginSub extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbmail, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfmail, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfname, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btcancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,7 +172,7 @@ public class LoginSub extends javax.swing.JFrame {
 
         p1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btcancel, btsign});
 
-        p1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfid, tfmail, tfpw});
+        p1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfid, tfname, tfpw});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,7 +219,7 @@ public class LoginSub extends javax.swing.JFrame {
     	//[1] id, pw 가져오기
     	String id = tfid.getText();
     	String pw = tfpw.getText();
-    	String name = tfmail.getText();
+    	String name = tfname.getText();
     	// [2] 공백 유효성 검사
     	if (id == null || pw == null || name == null) {
 			JOptionPane.showMessageDialog(this, "아이디와 비밀번호를 확인하세요");
@@ -277,6 +277,6 @@ public class LoginSub extends javax.swing.JFrame {
     private javax.swing.JLabel lbtitle;
     private javax.swing.JPanel p1;
     private javax.swing.JTextField tfid;
-    private javax.swing.JTextField tfmail;
+    private javax.swing.JTextField tfname;
     private javax.swing.JTextField tfpw;            
 }
