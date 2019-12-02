@@ -18,7 +18,7 @@ public class BoardDAO
 		try
 		{
 			con = DBConnection.getCon();
-			String sql = "select Boardnum, title, content, id wdate";
+			String sql = "select boardnum, title, content, id, wdate from board";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			ArrayList<BoardVO> arr = getList(rs);
@@ -48,13 +48,14 @@ public class BoardDAO
 	}
 
 	// 글 목록에서 글을 선택하면 본문이 열리는 메서드.
+	// 필요없는 메서드.
 	public int selectTopic()
 	{
 		try
 		{
-			int row = bl.jTable1.getSelectRow();
-			Object objBoardnum = jTalbe1.getValueAt(row, 0);
-			Integer Boardnum = (Integer) objBoardnum;
+			//int row = bl.jTable1.getSelectRow();
+			//Object objBoardnum = jTalbe1.getValueAt(row, 0);
+			//Integer Boardnum = (Integer) objBoardnum;
 		} 
 		catch (Exception e)
 		{
@@ -64,7 +65,7 @@ public class BoardDAO
 	}
 	
 	
-	// 글 목록에서 글을 지우는 메서드.
+	// 글 본문에서 글을 지우는 메서드.
 	public int delete(Integer boardnum)
 	{
 		try
@@ -86,6 +87,29 @@ public class BoardDAO
 			close();
 		}
 	}
+	
+	// 글 본문에서 글을 지우는 메서드.
+		public int update (BoardVO vo)
+		{
+			try
+			{
+				con = DBConnection.getCon();
+				String sql = "update board set content = '" + vo.getContent() + "' where boardnum = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, vo.getBoardnum());
+				ps.execute();
+				return vo.getBoardnum();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				return -1;
+			}
+			finally
+			{
+				close();
+			}
+		}
 	
 	
 	// DB로의 접속을 종료하는 메서드.

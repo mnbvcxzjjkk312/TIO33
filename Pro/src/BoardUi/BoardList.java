@@ -1,8 +1,10 @@
 package BoardUi;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class BoardList extends javax.swing.JFrame {
 
@@ -73,6 +75,11 @@ public class BoardList extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+//        ArrayList<BoardVO> arr = dao.makeList();
+//        
+//        showTable(arr);
+        
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -355,7 +362,9 @@ public class BoardList extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>     
+    
+    BoardDAO dao = new BoardDAO();
     // 글쓰기 창으로 가는 버튼
     private void btCreateActionPerformed(java.awt.event.ActionEvent evt) {                                         
         
@@ -379,7 +388,26 @@ public class BoardList extends javax.swing.JFrame {
     // 글 본문에서 글목록 이동버튼
     private void btReturn2ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         card.show(jPanel2,"L");
-    }                                         
+    }  
+    
+//    public void showTable(ArrayList<BoardVO> arr)
+//    {
+//    	String [] colHeader = {"글번호", "작성자", "메모내용", "작성일"};
+//    	Object [][] data = new Object[arr.size()][5];
+//    	// ArrayList에 있는 내용을 data에 옮기기.
+//    	for(int i = 0; i < data.length; i++)
+//    	{
+//    		BoardVO memo = arr.get(i);
+//    		data[i][0] = memo.getBoardnum();
+//    		data[i][1] = memo.getTitle();
+//    		data[i][2] = memo.getContent();
+//    		data[i][3] = memo.getId();
+//    		data[i][4] = memo.getWdate();
+//    	}
+//    	// DefaultTableModel = model = new DefaultTableModel(2차원 배열, 1차원 배열)
+//    	DefaultTableModel model = new DefaultTableModel(data, colHeader);
+//    	jTable1.setModel(model);
+//    }
 
     /**
      * @param args the command line arguments
