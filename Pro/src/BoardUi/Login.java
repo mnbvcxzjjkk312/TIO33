@@ -193,7 +193,7 @@ public class Login extends javax.swing.JFrame {
     	JOptionPane.showMessageDialog(this, "DB => true || false ");
     	
 		bl.pack();
-		bl.setLocation(500, 0);
+		bl.setLocation(500, 100);
 		bl.setVisible(true);
 		this.setVisible(false);
 		this.dispose();
@@ -202,14 +202,14 @@ public class Login extends javax.swing.JFrame {
     private void btSubActionPerformed(java.awt.event.ActionEvent evt) {                                      
     	ls = new LoginSub();
 		ls.pack();
-		ls.setLocation(500, 0);
+		ls.setLocation(500, 100);
 		ls.setVisible(true);
     }          
     
     private void btfindActionPerformed(java.awt.event.ActionEvent evt) {                                      
     	fu = new FindUser();
 		fu.pack();
-		fu.setLocation(500, 0);
+		fu.setLocation(500, 100);
 		fu.setVisible(true);
     }                
 

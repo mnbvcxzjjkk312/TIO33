@@ -1,6 +1,7 @@
 package BoardUi;
 
 import java.awt.CardLayout;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -76,9 +77,9 @@ public class BoardList extends javax.swing.JFrame {
             }
         });
         
-//        ArrayList<BoardVO> arr = dao.makeList();
-//        
-//        showTable(arr);
+        ArrayList<BoardVO> arr = dao.makeList();
+        
+        showTable(arr);
         
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -89,6 +90,16 @@ public class BoardList extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(400);
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(120);
+		//마우스 클릭시 본문이동
+		jTable1.addMouseListener(new MouseAdapter(){
+			//1 마우스로 누른 지점의 글 번호
+			int row = jTable1.getSelectedRow();
+			
+			// 선택한 글번호 가져오기
+			Object objIdx = jTable1.getValueAt(row,0);
+			Integer idx = (Integer) objIdx;
+			
+		});
 
         btCreate.setBackground(new java.awt.Color(58, 62, 70));
         btCreate.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
@@ -384,30 +395,32 @@ public class BoardList extends javax.swing.JFrame {
     // 글 본문 창에서 댓글 쓰기 버튼
     private void btReActionPerformed(java.awt.event.ActionEvent evt) {                                     
         // TODO add your handling code here:
-    }                                    
+    }                     
+    // 
+    
     // 글 본문에서 글목록 이동버튼
     private void btReturn2ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         card.show(jPanel2,"L");
     }  
     
-//    public void showTable(ArrayList<BoardVO> arr)
-//    {
-//    	String [] colHeader = {"글번호", "작성자", "메모내용", "작성일"};
-//    	Object [][] data = new Object[arr.size()][5];
-//    	// ArrayList에 있는 내용을 data에 옮기기.
-//    	for(int i = 0; i < data.length; i++)
-//    	{
-//    		BoardVO memo = arr.get(i);
-//    		data[i][0] = memo.getBoardnum();
-//    		data[i][1] = memo.getTitle();
-//    		data[i][2] = memo.getContent();
-//    		data[i][3] = memo.getId();
-//    		data[i][4] = memo.getWdate();
-//    	}
-//    	// DefaultTableModel = model = new DefaultTableModel(2차원 배열, 1차원 배열)
-//    	DefaultTableModel model = new DefaultTableModel(data, colHeader);
-//    	jTable1.setModel(model);
-//    }
+    public void showTable(ArrayList<BoardVO> arr)
+    {
+    	String [] colHeader = {"글번호", "작성자", "메모내용", "작성일"};
+    	Object [][] data = new Object[arr.size()][5];
+    	// ArrayList에 있는 내용을 data에 옮기기.
+    	for(int i = 0; i < data.length; i++)
+    	{
+    		BoardVO memo = arr.get(i);
+    		data[i][0] = memo.getBoardnum();
+    		data[i][1] = memo.getTitle();
+    		data[i][2] = memo.getContent();
+    		data[i][3] = memo.getId();
+    		data[i][4] = memo.getWdate();
+    	}
+    	// DefaultTableModel = model = new DefaultTableModel(2차원 배열, 1차원 배열)
+    	DefaultTableModel model = new DefaultTableModel(data, colHeader);
+    	jTable1.setModel(model);
+    }
 
     /**
      * @param args the command line arguments
