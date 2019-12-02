@@ -101,7 +101,7 @@ public class BoardList extends javax.swing.JFrame {
 			// 패널 전환 후 글 로드
 			public void view(Integer idx) {
 			card.show(jPanel2,"L");
-			
+			int a;
 			}
 		});
 
