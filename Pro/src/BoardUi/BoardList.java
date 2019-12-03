@@ -57,6 +57,7 @@ public class BoardList extends javax.swing.JFrame {
         lbtitle1 = new javax.swing.JLabel();
         btReturn2 = new javax.swing.JButton();
         btDel = new javax.swing.JButton();
+        btRe_view = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -238,6 +239,16 @@ public class BoardList extends javax.swing.JFrame {
                 btDelActionPerformed(evt);
             }
         });
+        
+        btRe_view.setBackground(new java.awt.Color(58, 62, 70));
+        btRe_view.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        btRe_view.setForeground(new java.awt.Color(196, 205, 216));
+        btRe_view.setText("댓글 보기");
+        btRe_view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRe_viewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pbWriteLayout = new javax.swing.GroupLayout(pbWrite);
         pbWrite.setLayout(pbWriteLayout);
@@ -355,23 +366,23 @@ public class BoardList extends javax.swing.JFrame {
             .addGroup(pbViewLayout.createSequentialGroup()
                 .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pbViewLayout.createSequentialGroup()
-                        .addGap(510, 510, 510)
-                        .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pbViewLayout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(lbtitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
-                            .addGroup(pbViewLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(593, 593, 593)
+                        .addComponent(lbtitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE))
                     .addGroup(pbViewLayout.createSequentialGroup()
-                        .addContainerGap(75, Short.MAX_VALUE)
-                        .addComponent(p3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addContainerGap(83, Short.MAX_VALUE)
+                        .addComponent(p3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pbViewLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btRe_view, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pbViewLayout.createSequentialGroup()
                     .addGap(38, 38, 38)
@@ -387,10 +398,11 @@ public class BoardList extends javax.swing.JFrame {
                 .addComponent(p3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap())
+                    .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRe_view, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
             .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pbViewLayout.createSequentialGroup()
                     .addGap(29, 29, 29)
@@ -437,7 +449,14 @@ public class BoardList extends javax.swing.JFrame {
 		re.pack();
 		re.setLocation(800, 100);
 		re.setVisible(true);
-    }                     
+    }
+    // 글 본문 창에서 댓글 보기 버튼
+    private void btRe_viewActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    	rl = new Reply_list();
+		rl.pack();
+		rl.setLocation(800, 100);
+		rl.setVisible(true);
+    }
     // 글 본문 창에서 글 삭제 버튼
     private void btDelActionPerformed(java.awt.event.ActionEvent evt) {                                      
     	
@@ -495,6 +514,7 @@ public class BoardList extends javax.swing.JFrame {
     private javax.swing.JButton btCreate;
     private javax.swing.JButton btRe;
     private javax.swing.JButton btDel;
+    private javax.swing.JButton btRe_view;
     private javax.swing.JButton btReturn;
     private javax.swing.JButton btReturn2;
     private javax.swing.JButton btSub;
