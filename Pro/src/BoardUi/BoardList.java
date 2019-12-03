@@ -1,6 +1,7 @@
 package BoardUi;
 
 import java.awt.CardLayout;
+import replyvo.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public class BoardList extends javax.swing.JFrame {
 
 	CardLayout card;
 	Login main;
+	Reply_rg re;
+	Reply_list rl;
 
 	public BoardList(Login main) {
         initComponents();
@@ -426,7 +429,10 @@ public class BoardList extends javax.swing.JFrame {
     }                                        
     // 글 본문 창에서 댓글 쓰기 버튼
     private void btReActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        // TODO add your handling code here:
+    	re = new Reply_rg();
+		re.pack();
+		re.setLocation(800, 100);
+		re.setVisible(true);
     }                     
     // 글 본문 창에서 글 삭제 버튼
     private void btDelActionPerformed(java.awt.event.ActionEvent evt) {                                      
