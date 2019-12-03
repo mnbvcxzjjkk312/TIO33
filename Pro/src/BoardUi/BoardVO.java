@@ -1,5 +1,6 @@
 package BoardUi;
 
+
 import java.sql.Date;
 
 public class BoardVO
