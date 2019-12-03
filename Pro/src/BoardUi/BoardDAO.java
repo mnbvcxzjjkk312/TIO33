@@ -19,7 +19,7 @@ public class BoardDAO
 	public int insertMember(MEMBERVO board) {
 		try {
 			con=DBUtil.getCon();
-			String sql= "insert into member values(board_seq.nextval,?,?,?,?)";
+			String sql= "insert into member values(member_seq.nextval,?,?,?,?)";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, board.getId());
 			ps.setString(2, board.getPw());
@@ -39,14 +39,14 @@ public class BoardDAO
 	
 	
 	//로그인 메소드
-	public ArrayList<BoardVO> Login(){
+	public ArrayList<MEMBERVO> Login(String Id){
 		try {
 			con=DBUtil.getCon();
-			String calId = "";
-			String sql = "SELECT member_no, id, password, name, grade FROM board ORDER BY 1 asc";
+			String sql = "SELECT member_no, id, password, name, grade FROM board WHERE id = ?";
 			ps = con.prepareStatement(sql);
+			ps.setString(1, Id);
 			rs = ps.executeQuery();
-			ArrayList<BoardVO> arr = makeList(rs);
+			ArrayList<MEMBERVO> arr = makeList(rs);
 			return arr;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class BoardDAO
 
 	
 	//보드를 만드는 메소드
-	public ArrayList<BoardVO> AddBoard(BoardVO board){
+	public int AddBoard(BoardVO board){
 		try {
 			con=DBUtil.getCon();
 			String sql = "INSERT INTO BOARD VALUES(board_seq.nextval,?,?,?,SYSDATE)";
@@ -70,20 +70,21 @@ public class BoardDAO
 			return n;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return -1;
 		} finally {
 			close();
 		}
 	}
 	
 	// 목록을 클릭하면 본문을 보여주는 메서드.
+
 	public ArrayList<BoardVO> clickContent(int type)
 	{
 		try
 		{
 			con = DBConnection.getCon();
 			
-			String sql = "insert into board values(board_seq.nextval,?,?,?,?)";
+			String sql = "select boardnum, title, content from board where boardnum = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, type);
 			rs = ps.executeQuery();
@@ -101,6 +102,7 @@ public class BoardDAO
 			close();
 		}
 	}
+	
 	
 	// 리스트 창에서 글 목록을 생성해 주는 메서드.
 	public ArrayList<BoardVO> makeList()
@@ -125,6 +127,20 @@ public class BoardDAO
 		}
 	}
 	
+	public ArrayList<MEMBERVO> makeList(ResultSet rs)
+	throws SQLException{
+		ArrayList<MEMBERVO> arr = new ArrayList<>();
+		while(rs.next()) {
+			int idx = rs.getInt("idx");
+			String name = rs.getString("name");
+			String msg = rs.getString("msg");
+			java.sql.Date wdate = rs.getDate("wdate");
+			MEMBERVO voTemp = new MEMBERVO(member_no, id, password, name, grade);
+			arr.add(voTemp);
+		}//while-------------
+		return arr;
+	}
+	
 	// DB에서 ROW를 가져오는 메서드.
 	public ArrayList<BoardVO> getList(ResultSet rs) throws SQLException
 	{
@@ -135,23 +151,6 @@ public class BoardDAO
 			bvoArr.add(bvoTemp);
 		}
 		return bvoArr;
-	}
-
-	// 글 목록에서 글을 선택하면 본문이 열리는 메서드.
-	// 필요없는 메서드.
-	public int selectTopic()
-	{
-		try
-		{
-			//int row = bl.jTable1.getSelectRow();
-			//Object objBoardnum = jTalbe1.getValueAt(row, 0);
-			//Integer Boardnum = (Integer) objBoardnum;
-		} 
-		catch (Exception e)
-		{
-			
-		}
-		return 0;
 	}
 	
 	
