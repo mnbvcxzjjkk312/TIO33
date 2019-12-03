@@ -3,56 +3,60 @@ package memvo;
 import java.sql.Date;
 
 public class MEMBERVO {
-	private int member_id_uk;
-	private int member_no_number;
-	private String mem_id_nn;
-	private String mem_pw_nn;
-	private String grade;
-	public int getMember_id_uk() {
-		return member_id_uk;
+	
+	private int member_no;
+	private String id;
+	private String password;
+	private String name;
+	private int grade;
+
+	
+	public int getMember_no() {
+		return member_no;
 	}
-	public void setMember_id_uk(int member_id_uk) {
-		this.member_id_uk = member_id_uk;
+	public void setMember_no(int member_no) {
+		this.member_no = member_no;
 	}
-	public int getMember_no_number() {
-		return member_no_number;
+	public String getId() {
+		return id;
 	}
-	public void setMember_no_number(int member_no_number) {
-		this.member_no_number = member_no_number;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getMem_id_nn() {
-		return mem_id_nn;
+	public String getPassword() {
+		return password;
 	}
-	public void setMem_id_nn(String mem_id_nn) {
-		this.mem_id_nn = mem_id_nn;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getMem_pw_nn() {
-		return mem_pw_nn;
+	public String getName() {
+		return name;
 	}
-	public void setMem_pw_nn(String mem_pw_nn) {
-		this.mem_pw_nn = mem_pw_nn;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
+	
 	public MEMBERVO() {
 		
 	}
-	public MEMBERVO(int member_id_uk, int member_no_number, String mem_id_nn, String mem_pw_nn, String grade) {
+	public MEMBERVO(int member_no, String id, String password, String name, int grade) {
 		super();
-		this.member_id_uk = member_id_uk;
-		this.member_no_number = member_no_number;
-		this.mem_id_nn = mem_id_nn;
-		this.mem_pw_nn = mem_pw_nn;
+		this.member_no = member_no;
+		this.id = id;
+		this.password = password;
+		this.name = name;
 		this.grade = grade;
 	}
 	@Override
 	public String toString() {
-		return "MEMBERVO [member_id_uk=" + member_id_uk + ", member_no_number=" + member_no_number + ", mem_id_nn="
-				+ mem_id_nn + ", mem_pw_nn=" + mem_pw_nn + ", grade=" + grade + "]";
+		return "MEMBERVO [member_no=" + member_no + ", id=" + id + ", password="
+				+ password + ", name=" + name + ", grade=" + grade + "]";
 	}
 	
 	

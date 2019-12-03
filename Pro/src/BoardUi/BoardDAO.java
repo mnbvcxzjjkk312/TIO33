@@ -22,9 +22,9 @@ public class BoardDAO
 			String sql= "insert into member values(member_seq.nextval,?,?,?,?)";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, board.getId());
-			ps.setString(2, board.getPw());
+			ps.setString(2, board.getPassword());
 			ps.setString(3, board.getName());
-			ps.setInt(4, board.getGr());
+			ps.setInt(4, board.getGrade());
 			int n = ps.executeUpdate();
 			return n;
 		} catch (SQLException e) {
@@ -131,10 +131,11 @@ public class BoardDAO
 	throws SQLException{
 		ArrayList<MEMBERVO> arr = new ArrayList<>();
 		while(rs.next()) {
-			int idx = rs.getInt("idx");
+			int member_no = rs.getInt("member_no");
+			String id = rs.getString("id");
+			String password = rs.getString("password");
 			String name = rs.getString("name");
-			String msg = rs.getString("msg");
-			java.sql.Date wdate = rs.getDate("wdate");
+			int grade = rs.getInt("grade");
 			MEMBERVO voTemp = new MEMBERVO(member_no, id, password, name, grade);
 			arr.add(voTemp);
 		}//while-------------
