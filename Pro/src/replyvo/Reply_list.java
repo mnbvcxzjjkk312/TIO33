@@ -11,21 +11,24 @@ import BoardUi.BoardVO;
 
 public class Reply_list extends javax.swing.JFrame {
 	
-	public void showTable(ArrayList<ReplyVO>arr) {
+	ReplyDAO dao = new ReplyDAO();
+	
+	public void showTable(ArrayList<ReplyVO> arr) {
 		String [] colHeader = {"글번호", "댓글 내용", "날짜", "작성자"};
 		Object [][]data = new Object[arr.size()][5];
 		
 		for(int i=0; i<data.length; i++)
 		{
-			BoardVO reply=arr.get(i);
+			ReplyVO reply=arr.get(i);
 			data[i][0]=reply.getIdx();
 			data[i][1]=reply.getR_content();
 			data[i][2]=reply.getR_wdate();
 			data[i][3]=reply.getId();
 		}
 		DefaultTableModel mode1 =new DefaultTableModel(data,colHeader);
-		jTable1.setModel(model);
+		table.setModel(mode1);
 	}
+	
 
     public Reply_list() {
         initComponents();
@@ -71,6 +74,11 @@ public class Reply_list extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+        ArrayList<ReplyVO> arr = dao.listReply();
+        
+    	showTable(arr);
+    	
         jScrollPane2.setViewportView(table);
         
         

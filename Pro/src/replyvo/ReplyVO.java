@@ -1,10 +1,12 @@
 package replyvo;
 
+import java.sql.Date;
+
 public class ReplyVO {
 
 	private int idx;
 	private String r_content;
-	private String r_wdate;
+	private Date r_wdate;
 	private String id;
 	public int getIdx() {
 		return idx;
@@ -18,10 +20,10 @@ public class ReplyVO {
 	public void setR_content(String r_content) {
 		this.r_content = r_content;
 	}
-	public String getR_wdate() {
+	public Date getR_wdate() {
 		return r_wdate;
 	}
-	public void setR_wdate(String r_wdate) {
+	public void setR_wdate(Date r_wdate) {
 		this.r_wdate = r_wdate;
 	}
 	public String getId() {
@@ -33,7 +35,7 @@ public class ReplyVO {
 	public ReplyVO() {
 		
 	}
-	public ReplyVO(int idx, String r_content, String r_wdate, String id) {
+	public ReplyVO(int idx, String r_content, Date r_wdate, String id) {
 		super();
 		this.idx = idx;
 		this.r_content = r_content;

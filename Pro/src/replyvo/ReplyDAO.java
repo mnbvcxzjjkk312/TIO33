@@ -13,13 +13,13 @@ public class ReplyDAO {
 	Connection con;
 	PreparedStatement ps;
 	ResultSet rs;
-	public ArrayList<ReplyVO> listMemo(){
+	public ArrayList<ReplyVO> listReply(){
 		try {
 			con=DBUtil.getCon();
-			String sql="SELECT idx,name,rpad(msg,50,' ') AS msg,wdate"
-					+" FROM memo ORDER BY 1 DESC";
+			String sql="SELECT idx,r_content,r_wdate,id FROM reply ORDER BY 1 DESC";
 			ps=con.prepareStatement(sql);
 			rs=ps.executeQuery();
+			
 			ArrayList<ReplyVO> arr=makeList(rs);
 			return arr;
 			
