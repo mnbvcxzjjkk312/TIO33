@@ -2,6 +2,7 @@ package replyvo;
 
 public class Reply_rg extends javax.swing.JFrame {
 
+	
     public Reply_rg() {
         initComponents();
     }
@@ -98,12 +99,27 @@ public class Reply_rg extends javax.swing.JFrame {
     }// </editor-fold>  
     
     // 누르면 댓글 등록되는 버튼
+    ReplyDAO dao=new ReplyDAO();
     private void btActionPerformed(java.awt.event.ActionEvent evt) {                                   
-        // TODO add your handling code here:
+        String msg= ta.getText();
+        if(msg==null||msg.trim().isEmpty()) {
+        	showMessage("댓글을 입력하세요.");
+        	return;
+        }
+        ReplyVO rv=new ReplyVO(0,msg,null,null);
+        int cnt=dao.insertMsg(rv);
+        String str=(cnt>0)?"댓글 등록 성공":"댓글 등록 실패";
+        showMessage(str);
+        ta.setText(msg);
     }
 
     
-    /**
+    private void showMessage(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
