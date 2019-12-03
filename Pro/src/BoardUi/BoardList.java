@@ -1,17 +1,24 @@
 package BoardUi;
 
 import java.awt.CardLayout;
+import replyvo.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import boardvo.*;
+import memvo.*;
+
 public class BoardList extends javax.swing.JFrame {
 
-    CardLayout card;
-    Login main;
-    
-    public BoardList(Login main) {
+	CardLayout card;
+	Login main;
+	Reply_rg re;
+	Reply_list rl;
+
+	public BoardList(Login main) {
         initComponents();
         this.main=main;
         card=(CardLayout)this.jPanel2.getLayout();
@@ -21,7 +28,7 @@ public class BoardList extends javax.swing.JFrame {
        
     }
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
@@ -49,6 +56,7 @@ public class BoardList extends javax.swing.JFrame {
         tades1 = new javax.swing.JTextArea();
         lbtitle1 = new javax.swing.JLabel();
         btReturn2 = new javax.swing.JButton();
+        btDel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,9 +84,9 @@ public class BoardList extends javax.swing.JFrame {
             }
         });
         
-//        ArrayList<BoardVO> arr = dao.makeList();
-//        
-//        showTable(arr);
+        ArrayList<BoardVO> arr = dao.makeList();
+        
+        showTable(arr);
         
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -89,6 +97,31 @@ public class BoardList extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(400);
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(120);
+		
+		//마우스 클릭시 본문이동
+		jTable1.addMouseListener(new MouseAdapter(){
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+			//1 마우스로 누른 지점의 글 번호
+			int row = jTable1.getSelectedRow();
+			
+			// 선택한 글번호 가져오기
+			Object objIdx = jTable1.getValueAt(row,0);
+			Integer idx = (Integer) objIdx;
+			// 패널 전환 후 글 로드
+			
+			ArrayList<BoardVO> arr = dao.clickContent(idx);
+			if(arr!=null&&arr.size()==1) {
+				BoardVO b=arr.get(0);
+				tftitle.setText(b.getTitle());
+				tades.setText(b.getContent());
+			}
+			card.show(jPanel2,"V");
+
+			}
+			
+		 });
 
         btCreate.setBackground(new java.awt.Color(58, 62, 70));
         btCreate.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
@@ -189,6 +222,16 @@ public class BoardList extends javax.swing.JFrame {
         btReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btReturnActionPerformed(evt);
+            }
+        });
+        
+        btDel.setBackground(new java.awt.Color(58, 62, 70));
+        btDel.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        btDel.setForeground(new java.awt.Color(196, 205, 216));
+        btDel.setText("글 삭제");
+        btDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDelActionPerformed(evt);
             }
         });
 
@@ -316,6 +359,8 @@ public class BoardList extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
                             .addGroup(pbViewLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -338,9 +383,10 @@ public class BoardList extends javax.swing.JFrame {
                 .addComponent(p3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addComponent(btRe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap())
             .addGroup(pbViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pbViewLayout.createSequentialGroup()
                     .addGap(29, 29, 29)
@@ -383,31 +429,39 @@ public class BoardList extends javax.swing.JFrame {
     }                                        
     // 글 본문 창에서 댓글 쓰기 버튼
     private void btReActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        // TODO add your handling code here:
-    }                                    
+    	re = new Reply_rg();
+		re.pack();
+		re.setLocation(800, 100);
+		re.setVisible(true);
+    }                     
+    // 글 본문 창에서 글 삭제 버튼
+    private void btDelActionPerformed(java.awt.event.ActionEvent evt) {                                      
+    	
+    }
+    
     // 글 본문에서 글목록 이동버튼
     private void btReturn2ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         card.show(jPanel2,"L");
     }  
     
-//    public void showTable(ArrayList<BoardVO> arr)
-//    {
-//    	String [] colHeader = {"글번호", "작성자", "메모내용", "작성일"};
-//    	Object [][] data = new Object[arr.size()][5];
-//    	// ArrayList에 있는 내용을 data에 옮기기.
-//    	for(int i = 0; i < data.length; i++)
-//    	{
-//    		BoardVO memo = arr.get(i);
-//    		data[i][0] = memo.getBoardnum();
-//    		data[i][1] = memo.getTitle();
-//    		data[i][2] = memo.getContent();
-//    		data[i][3] = memo.getId();
-//    		data[i][4] = memo.getWdate();
-//    	}
-//    	// DefaultTableModel = model = new DefaultTableModel(2차원 배열, 1차원 배열)
-//    	DefaultTableModel model = new DefaultTableModel(data, colHeader);
-//    	jTable1.setModel(model);
-//    }
+    public void showTable(ArrayList<BoardVO> arr)
+    {
+    	String [] colHeader = {"글번호", "작성자", "메모내용", "작성일"};
+    	Object [][] data = new Object[arr.size()][5];
+    	// ArrayList에 있는 내용을 data에 옮기기.
+    	for(int i = 0; i < data.length; i++)
+    	{
+    		BoardVO memo = arr.get(i);
+    		data[i][0] = memo.getBoardnum();
+    		data[i][1] = memo.getTitle();
+    		data[i][2] = memo.getContent();
+    		data[i][3] = memo.getId();
+    		data[i][4] = memo.getWdate();
+    	}
+    	// DefaultTableModel = model = new DefaultTableModel(2차원 배열, 1차원 배열)
+    	DefaultTableModel model = new DefaultTableModel(data, colHeader);
+    	jTable1.setModel(model);
+    }
 
     /**
      * @param args the command line arguments
@@ -436,6 +490,7 @@ public class BoardList extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton btCreate;
     private javax.swing.JButton btRe;
+    private javax.swing.JButton btDel;
     private javax.swing.JButton btReturn;
     private javax.swing.JButton btReturn2;
     private javax.swing.JButton btSub;
