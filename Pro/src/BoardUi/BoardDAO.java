@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import memvo.MEMBERVO;
+import boardvo.BoardVO;
 
 
 public class BoardDAO
@@ -14,14 +15,16 @@ public class BoardDAO
 	PreparedStatement ps;
 	ResultSet rs;
 	
-	public int insertUser(UserVO user) {
+	
+	public int insertMember(MEMBERVO board) {
 		try {
 			con=DBUtil.getCon();
-			String sql= "insert into user values(user_seq.nextval,?,?,?)";
+			String sql= "insert into member values(board_seq.nextval,?,?,?,?)";
 			ps=con.prepareStatement(sql);
-			ps.setString(1, user.getId());
-			ps.setString(2, user.getPw());
-			ps.setInt(3, user.getGr());
+			ps.setString(1, board.getId());
+			ps.setString(2, board.getPw());
+			ps.setString(3, board.getName());
+			ps.setInt(4, board.getGr());
 			int n = ps.executeUpdate();
 			return n;
 		} catch (SQLException e) {
@@ -33,13 +36,54 @@ public class BoardDAO
 	}//--------------------------------------
 	
 	
+	
+	
+	//로그인 메소드
+	public ArrayList<BoardVO> Login(){
+		try {
+			con=DBUtil.getCon();
+			String calId = "";
+			String sql = "SELECT member_no, id, password, name, grade FROM board ORDER BY 1 asc";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<BoardVO> arr = makeList(rs);
+			return arr;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			close();
+		}
+	}
+
+	
+	//보드를 만드는 메소드
+	public ArrayList<BoardVO> AddBoard(BoardVO board){
+		try {
+			con=DBUtil.getCon();
+			String sql = "INSERT INTO BOARD VALUES(board_seq.nextval,?,?,?,SYSDATE)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getContent());
+			ps.setString(3, board.getId());
+			int n = ps.executeUpdate();
+			return n;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			close();
+		}
+	}
+	
+	// 목록을 클릭하면 본문을 보여주는 메서드.
 	public ArrayList<BoardVO> clickContent(int type)
 	{
 		try
 		{
 			con = DBConnection.getCon();
 			
-			String sql = "select boardnum, title, content from board where boardnum = ?";
+			String sql = "insert into board values(board_seq.nextval,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, type);
 			rs = ps.executeQuery();
@@ -54,23 +98,6 @@ public class BoardDAO
 		}
 		finally
 		{
-			close();
-		}
-	}
-	
-	public ArrayList<UserVO> Login(){
-		try {
-			con=DBUtil.getCon();
-			String calId = "";
-			String sql = "SELECT idx, id, pw, gr FROM user ORDER BY 1 asc";
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			ArrayList<UserVO> arr = makeList(rs);
-			return arr;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
 			close();
 		}
 	}
