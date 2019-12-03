@@ -5,8 +5,8 @@ import java.sql.*;
 
 public class DBConnection
 {
-	static String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	static String user = "project3", pwd = "1234";
+	static String url = "jdbc:oracle:thin:@192.168.0.94:1521:XE";
+	static String user = "project3", pwd = "Abcd1234";
 	
 	static
 	{

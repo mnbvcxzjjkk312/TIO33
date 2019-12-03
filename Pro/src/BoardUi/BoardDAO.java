@@ -9,6 +9,7 @@ import memvo.MEMBERVO;
 import boardvo.BoardVO;
 
 
+
 public class BoardDAO
 {
 	Connection con;
@@ -25,6 +26,7 @@ public class BoardDAO
 			ps.setString(2, board.getPassword());
 			ps.setString(3, board.getName());
 			ps.setInt(4, board.getGrade());
+
 			int n = ps.executeUpdate();
 			return n;
 		} catch (SQLException e) {
@@ -46,7 +48,9 @@ public class BoardDAO
 			ps = con.prepareStatement(sql);
 			ps.setString(1, Id);
 			rs = ps.executeQuery();
+
 			ArrayList<MEMBERVO> arr = makeList(rs);
+
 			return arr;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,6 +64,7 @@ public class BoardDAO
 	//보드를 만드는 메소드
 	public int AddBoard(BoardVO board){
 		try {
+			ArrayList<BoardVO> ab = null;
 			con=DBUtil.getCon();
 			String sql = "INSERT INTO BOARD VALUES(board_seq.nextval,?,?,?,SYSDATE)";
 			ps = con.prepareStatement(sql);
@@ -148,7 +153,7 @@ public class BoardDAO
 		ArrayList<BoardVO> bvoArr = new ArrayList();
 		while(rs.next())
 		{
-			BoardVO bvoTemp = new BoardVO(rs.getInt("Boardnum"), rs.getString("title"), rs.getString("content"), rs.getString("id"), rs.getDate("wdate"));
+			BoardVO bvoTemp = new BoardVO(rs.getInt("boardnum"), rs.getString("title"), rs.getString("content"), rs.getString("id"), rs.getDate("wdate"));
 			bvoArr.add(bvoTemp);
 		}
 		return bvoArr;
