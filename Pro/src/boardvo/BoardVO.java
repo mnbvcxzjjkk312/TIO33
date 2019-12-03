@@ -1,11 +1,13 @@
 package boardvo;
 
+import java.sql.Date;
+
 public class BoardVO {
 	private int boardnum;
 	private String title;
 	private String content;
 	private String id;
-	private String wdate;
+	private Date wdate;
 	public int getBoardnum() {
 		return boardnum;
 	}
@@ -30,16 +32,16 @@ public class BoardVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getWdate() {
+	public Date getWdate() {
 		return wdate;
 	}
-	public void setWdate(String wdate) {
+	public void setWdate(Date wdate) {
 		this.wdate = wdate;
 	}
 	public BoardVO() {
 		
 	}
-	public BoardVO(int boardnum, String title, String content, String id, String wdate) {
+	public BoardVO(int boardnum, String title, String content, String id, Date wdate) {
 		super();
 		this.boardnum = boardnum;
 		this.title = title;
