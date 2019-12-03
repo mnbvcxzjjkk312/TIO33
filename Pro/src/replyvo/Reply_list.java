@@ -1,13 +1,36 @@
 package replyvo;
 
-public class Reply_list extends javax.swing.JFrame {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
+import BoardUi.BoardVO;
+
+public class Reply_list extends javax.swing.JFrame {
+	
+	public void showTable(ArrayList<ReplyVO>arr) {
+		String [] colHeader = {"글번호", "댓글 내용", "날짜", "작성자"};
+		Object [][]data = new Object[arr.size()][5];
+		
+		for(int i=0; i<data.length; i++)
+		{
+			BoardVO reply=arr.get(i);
+			data[i][0]=reply.getIdx();
+			data[i][1]=reply.getR_content();
+			data[i][2]=reply.getR_wdate();
+			data[i][3]=reply.getId();
+		}
+		DefaultTableModel mode1 =new DefaultTableModel(data,colHeader);
+		jTable1.setModel(model);
+	}
 
     public Reply_list() {
         initComponents();
     }
-
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
@@ -49,6 +72,8 @@ public class Reply_list extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(table);
+        
+        
 
         javax.swing.GroupLayout p1Layout = new javax.swing.GroupLayout(p1);
         p1.setLayout(p1Layout);
