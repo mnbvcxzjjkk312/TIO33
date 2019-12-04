@@ -189,18 +189,15 @@ public class LoginSub extends javax.swing.JFrame {
     }// </editor-fold>   
     
     private void btidActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "tfid.getText => DB에 있음?");
-    	JOptionPane.showMessageDialog(this, "DB => true || false ");
+    	JOptionPane.showMessageDialog(this, "사용가능한 ID 입니다.");
     }       
     
     private void btcancelActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "창 닫기 메소드 진행..");
     	this.setVisible(false);
 		this.dispose();
     }         
     private void btsignActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
-    	JOptionPane.showMessageDialog(this, "UPDATE DB !! ");
+    	JOptionPane.showMessageDialog(this, "정상 가입되었습니다! ");
     }                                      
 
     public static void main(String args[]) {

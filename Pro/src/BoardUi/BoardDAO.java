@@ -16,8 +16,7 @@ public class BoardDAO
 	PreparedStatement ps;
 	ResultSet rs;
 	
-	
-<<<<<<< HEAD
+
 	public int insertMember(MEMBERVO board) {
 		try {
 			con=DBUtil.getCon();
@@ -108,10 +107,7 @@ public class BoardDAO
 			close();
 		}
 	}
-	
-	
-=======
->>>>>>> refs/heads/M2_smh2
+
 	// 리스트 창에서 글 목록을 생성해 주는 메서드.
 	public ArrayList<BoardVO> makeList()
 	{

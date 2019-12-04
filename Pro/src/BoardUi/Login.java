@@ -188,9 +188,6 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>
     
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {
-    	JOptionPane.showMessageDialog(this, "아이디 검사 코드 실행!");
-    	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
-    	JOptionPane.showMessageDialog(this, "DB => true || false ");
     	
 		bl.pack();
 		bl.setLocation(500, 100);
