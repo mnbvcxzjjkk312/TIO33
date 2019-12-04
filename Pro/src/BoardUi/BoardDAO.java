@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import memvo.MEMBERVO;
 import boardvo.BoardVO;
-
 
 
 public class BoardDAO
@@ -16,8 +16,10 @@ public class BoardDAO
 	PreparedStatement ps;
 	ResultSet rs;
 	
+	String uid;
+	String upw;
 	
-<<<<<<< HEAD
+	// 사용자 추가 메서드
 	public int insertMember(MEMBERVO board) {
 		try {
 			con=DBUtil.getCon();
@@ -38,30 +40,31 @@ public class BoardDAO
 		}
 	}//--------------------------------------
 	
-	
-	
-	
-	//로그인 메소드
-	public ArrayList<MEMBERVO> Login(String Id){
+	//로그인하는 메소드
+	public void login(String id, String pwd)
+	{
 		try {
-			con=DBUtil.getCon();
-			String sql = "SELECT member_no, id, password, name, grade FROM board WHERE id = ?";
+			con=DBConnection.getCon();
+			String sql = "SELECT id, password FROM member WHERE id = ?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, Id);
+			ps.setString(1, id);
 			rs = ps.executeQuery();
-
-			ArrayList<MEMBERVO> arr = makeList(rs);
-
-			return arr;
-		} catch (SQLException e) {
+			if(rs.next())
+			{
+				uid = rs.getString("id");
+				upw = rs.getString("password");
+			}
+			
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
-			return null;
-		} finally {
+		} finally 
+		{
 			close();
 		}
 	}
 
-	
 	//보드를 만드는 메소드
 	public int AddBoard(BoardVO board){
 		try {
@@ -83,7 +86,6 @@ public class BoardDAO
 	}
 	
 	// 목록을 클릭하면 본문을 보여주는 메서드.
-
 	public ArrayList<BoardVO> clickContent(int type)
 	{
 		try
@@ -108,10 +110,7 @@ public class BoardDAO
 			close();
 		}
 	}
-	
-	
-=======
->>>>>>> refs/heads/M2_smh2
+
 	// 리스트 창에서 글 목록을 생성해 주는 메서드.
 	public ArrayList<BoardVO> makeList()
 	{

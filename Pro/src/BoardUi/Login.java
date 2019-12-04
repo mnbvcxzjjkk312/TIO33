@@ -187,16 +187,25 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
     
-    private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {
-    	JOptionPane.showMessageDialog(this, "아이디 검사 코드 실행!");
-    	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
-    	JOptionPane.showMessageDialog(this, "DB => true || false ");
-    	
-		bl.pack();
-		bl.setLocation(500, 100);
-		bl.setVisible(true);
-		this.setVisible(false);
-		this.dispose();
+    private void btLoginActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+    	BoardDAO bdao = new BoardDAO();
+    	String lid = tfid.getText();
+    	String lpw = tfpw.getText();
+    	bdao.login(lid, lpw);
+    		if(lid.equals(bdao.uid)&&lpw.equals(bdao.upw)) 
+    		{
+	    		JOptionPane.showMessageDialog(this, "환영합니다.");
+	    		bl.pack();
+	    		bl.setLocation(500, 100);
+	    		bl.setVisible(true);
+	    		this.setVisible(false);
+	    		this.dispose();
+    		}
+    		else 
+    		{
+    			JOptionPane.showMessageDialog(this, "아이디나 비밀번호가 틀렸습니다.");
+    		}
 	}
 
     private void btSubActionPerformed(java.awt.event.ActionEvent evt) {                                      

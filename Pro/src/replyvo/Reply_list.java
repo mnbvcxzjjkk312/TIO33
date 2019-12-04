@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-import BoardUi.BoardVO;
 
 public class Reply_list extends javax.swing.JFrame {
 	
