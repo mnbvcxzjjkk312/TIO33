@@ -2,6 +2,8 @@ package BoardUi;
 
 import javax.swing.JOptionPane;
 
+import boardvo.BoardVO;
+
 public class BoardMain extends javax.swing.JFrame {
 
     public BoardMain() {
@@ -119,7 +121,7 @@ public class BoardMain extends javax.swing.JFrame {
     }// </editor-fold>     
     
     private void btCreateActionPerformed(java.awt.event.ActionEvent evt) {
-    	JOptionPane.showMessageDialog(this, "등록이 진행됩니다.");
+    	
 	}
 
  

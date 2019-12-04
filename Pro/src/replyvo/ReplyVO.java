@@ -8,6 +8,8 @@ public class ReplyVO {
 	private String r_content;
 	private Date r_wdate;
 	private String id;
+	private int boardNum;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -35,16 +37,25 @@ public class ReplyVO {
 	public ReplyVO() {
 		
 	}
-	public ReplyVO(int idx, String r_content, Date r_wdate, String id) {
+	public ReplyVO(int idx, String r_content, Date r_wdate, String id, int boardNum) {
 		super();
 		this.idx = idx;
 		this.r_content = r_content;
 		this.r_wdate = r_wdate;
 		this.id = id;
+		this.boardNum = boardNum;
 	}
 	@Override
 	public String toString() {
-		return "ReplyVO [idx=" + idx + ", r_content=" + r_content + ", r_wdate=" + r_wdate + ", id=" + id + "]";
+		return "ReplyVO [idx=" + idx + ", r_content=" + r_content + ", r_wdate=" + r_wdate + ", id=" + id + ", boardNum=" + boardNum + "]";
+	}
+	public int getBoardNum()
+	{
+		return boardNum;
+	}
+	public void setBoardNum(int boardNum)
+	{
+		this.boardNum = boardNum;
 	}
 	
 	

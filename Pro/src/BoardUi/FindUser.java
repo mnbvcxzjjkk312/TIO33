@@ -3,7 +3,7 @@ package BoardUi;
 import javax.swing.JOptionPane;
 
 public class FindUser extends javax.swing.JFrame {
-// 아이디 비밀번호 찾기
+	// 아이디 비밀번호 찾기
 	public FindUser() {
 		initComponents();
 	}

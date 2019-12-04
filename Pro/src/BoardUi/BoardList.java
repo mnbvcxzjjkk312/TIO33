@@ -1,7 +1,6 @@
 package BoardUi;
 
 import java.awt.CardLayout;
-import replyvo.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import boardvo.*;
 import memvo.*;
+import replyvo.*;
 
 public class BoardList extends javax.swing.JFrame {
 
@@ -17,7 +17,11 @@ public class BoardList extends javax.swing.JFrame {
 	Login main;
 	Reply_rg re;
 	Reply_list rl;
+	public static Integer idx;
 
+	// 12.04 추가한 코드. 생성자.
+	public BoardList() {}
+	
 	public BoardList(Login main) {
         initComponents();
         this.main=main;
@@ -85,8 +89,8 @@ public class BoardList extends javax.swing.JFrame {
             }
         });
         
+        // 글 목록 창에 글 목록을 보여주는 코드.
         ArrayList<BoardVO> arr = dao.makeList();
-        
         showTable(arr);
         
         jScrollPane1.setViewportView(jTable1);
@@ -99,33 +103,28 @@ public class BoardList extends javax.swing.JFrame {
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(400);
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(120);
 		
-		//마우스 클릭시 본문이동
-		jTable1.addMouseListener(new MouseAdapter(){
-			
+		//마우스 클릭시 본문으로 이동
+		jTable1.addMouseListener(new MouseAdapter()
+		{
 			@Override
-			public void mousePressed(MouseEvent e) {
-			//1 마우스로 누른 지점의 글 번호
+			public void mousePressed(MouseEvent e) 
+			{
+			// 마우스로 누른 지점의 글 번호
 			int row = jTable1.getSelectedRow();
 			
 			// 선택한 글번호 가져오기
 			Object objIdx = jTable1.getValueAt(row,0);
-			Integer idx = (Integer) objIdx;
-			// 패널 전환 후 글 로드
-
-			card.show(jPanel2,"V");		
-			//tftitle.append(idx);
-			//tades.append(str1);
-			
-			ArrayList<BoardVO> arr = dao.clickContent(idx);
-			if(arr!=null&&arr.size()==1) {
-				BoardVO b=arr.get(0);
-				tftitle.setText(b.getTitle());
-				tades.setText(b.getContent());
+				idx = (Integer) objIdx;
+				
+				ArrayList<BoardVO> arr = dao.clickContent(idx);
+				if(arr!=null&&arr.size()==1) 
+				{
+					BoardVO b=arr.get(0);
+					tftitle1.setText(b.getTitle());
+					tades1.setText(b.getContent());
+				}
+				card.show(jPanel2,"V");
 			}
-			card.show(jPanel2,"V");
-
-			}
-			
 		 });
 
         btCreate.setBackground(new java.awt.Color(58, 62, 70));
@@ -427,28 +426,40 @@ public class BoardList extends javax.swing.JFrame {
     }// </editor-fold>     
     
     BoardDAO dao = new BoardDAO();
-    // 글쓰기 창으로 가는 버튼
+    // 글 목록 창에서 글쓰기 창으로 가는 버튼
     private void btCreateActionPerformed(java.awt.event.ActionEvent evt) {                                         
         
         card.show(jPanel2,"W");
     }                                        
     // 글쓰기 창에서 글 등록 버튼
     private void btSubActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        // TODO add your handling code here:
-    	JOptionPane.showMessageDialog(this, "tftitle.getText + tades.getText => DB !");
-    	JOptionPane.showMessageDialog(this, "UPDATE COLUMN !");
+    	BoardDAO dao = new BoardDAO();
+    	BoardVO vo = new BoardVO();
+    	
+    	// 12.04 추가. 글 등록시 id 추가 및 글 등록 후 글목록 자동 refresh.
+    	vo.setTitle(tftitle.getText());
+    	vo.setContent(tades.getText());
+    	vo.setId(dao.uid);
+    	dao.AddBoard(vo);
+    	
+    	jTable1.removeAll();
+    	
+        ArrayList<BoardVO> arr = dao.makeList();
+        showTable(arr);
+    	
         card.show(jPanel2,"L"); // 임시코드
     }                                     
     // 글쓰기 창에서 글목록으로 이동 버튼
     private void btReturnActionPerformed(java.awt.event.ActionEvent evt) {                                         
         card.show(jPanel2,"L");
     }                                        
-    // 글 본문 창에서 댓글 쓰기 버튼
+    // 글 본문 창에서 댓글 등록 버튼
     private void btReActionPerformed(java.awt.event.ActionEvent evt) {                                     
     	re = new Reply_rg();
 		re.pack();
 		re.setLocation(800, 100);
 		re.setVisible(true);
+		re.boardNum = idx;
     }
     // 글 본문 창에서 댓글 보기 버튼
     private void btRe_viewActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -456,30 +467,31 @@ public class BoardList extends javax.swing.JFrame {
 		rl.pack();
 		rl.setLocation(800, 100);
 		rl.setVisible(true);
+		
     }
     // 글 본문 창에서 글 삭제 버튼
     private void btDelActionPerformed(java.awt.event.ActionEvent evt) {                                      
     	
     }
     
-    // 글 본문에서 글목록 이동버튼
+    // 글 본문 창에서 글목록으로 이동 버튼
     private void btReturn2ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         card.show(jPanel2,"L");
     }  
-    
+    // 글 목록 창에 보여줄 글 목록을 생성하는 메서드.
     public void showTable(ArrayList<BoardVO> arr)
     {
-    	String [] colHeader = {"글번호", "작성자", "메모내용", "작성일"};
+    	String [] colHeader = {"글번호", "제목", "글내용", "작성자"};
     	Object [][] data = new Object[arr.size()][5];
     	// ArrayList에 있는 내용을 data에 옮기기.
     	for(int i = 0; i < data.length; i++)
     	{
-    		BoardVO memo = arr.get(i);
-    		data[i][0] = memo.getBoardnum();
-    		data[i][1] = memo.getTitle();
-    		data[i][2] = memo.getContent();
-    		data[i][3] = memo.getId();
-    		data[i][4] = memo.getWdate();
+    		BoardVO contentsList = arr.get(i);
+    		data[i][0] = contentsList.getBoardnum();
+    		data[i][1] = contentsList.getTitle();
+    		data[i][2] = contentsList.getContent();
+    		data[i][3] = contentsList.getId();
+    		data[i][4] = contentsList.getWdate();
     	}
     	// DefaultTableModel = model = new DefaultTableModel(2차원 배열, 1차원 배열)
     	DefaultTableModel model = new DefaultTableModel(data, colHeader);

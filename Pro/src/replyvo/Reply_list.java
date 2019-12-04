@@ -7,8 +7,11 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
+import BoardUi.BoardList;
+
 
 public class Reply_list extends javax.swing.JFrame {
+	
 	
 	ReplyDAO dao = new ReplyDAO();
 	
@@ -74,7 +77,9 @@ public class Reply_list extends javax.swing.JFrame {
             }
         });
         
-        ArrayList<ReplyVO> arr = dao.listReply();
+        BoardList blist = new BoardList();
+        
+        ArrayList<ReplyVO> arr = dao.listReply(blist.idx);
         
     	showTable(arr);
     	

@@ -2,8 +2,11 @@ package replyvo;
 
 import javax.swing.JOptionPane;
 
+import BoardUi.BoardDAO;
+
 public class Reply_rg extends javax.swing.JFrame {
 
+	public Integer boardNum;
 	
     public Reply_rg() {
         initComponents();
@@ -108,7 +111,8 @@ public class Reply_rg extends javax.swing.JFrame {
         	showMessage("댓글을 입력하세요.");
         	return;
         }
-        ReplyVO rv=new ReplyVO(0,msg,null,null);
+        BoardDAO bdao = new BoardDAO();
+        ReplyVO rv=new ReplyVO(0,msg,null,bdao.uid, boardNum);
         int cnt=dao.insertMsg(rv);
         String str=(cnt>0)?"댓글 등록 성공":"댓글 등록 실패";
         //showMessage(str);

@@ -188,16 +188,20 @@ public class LoginSub extends javax.swing.JFrame {
         pack();
     }// </editor-fold>   
     
+    // 중복확인 버튼
     private void btidActionPerformed(java.awt.event.ActionEvent evt) {                                       
     	JOptionPane.showMessageDialog(this, "tfid.getText => DB에 있음?");
     	JOptionPane.showMessageDialog(this, "DB => true || false ");
     }       
     
+    // 취소 버튼. 현재 없음.
     private void btcancelActionPerformed(java.awt.event.ActionEvent evt) {                                       
     	JOptionPane.showMessageDialog(this, "창 닫기 메소드 진행..");
     	this.setVisible(false);
 		this.dispose();
-    }         
+    }
+    
+    // 회원가입 버튼
     private void btsignActionPerformed(java.awt.event.ActionEvent evt) {                                       
     	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
     	JOptionPane.showMessageDialog(this, "UPDATE DB !! ");
