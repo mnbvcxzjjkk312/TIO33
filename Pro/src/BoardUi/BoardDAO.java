@@ -23,7 +23,7 @@ public class BoardDAO
 	public int insertMember(MEMBERVO member) {
 		try {
 			con=DBConnection.getCon();
-			String sql= "insert into member values(member_seq.nextval,?,?,?,1)";
+			String sql= "insert into member values(seq_member.nextval,?,?,?,1)";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, member.getId());
 			ps.setString(2, member.getPassword());
