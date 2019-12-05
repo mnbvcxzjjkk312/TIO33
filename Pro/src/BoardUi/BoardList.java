@@ -36,12 +36,15 @@ public class BoardList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+		jPanel2 = new javax.swing.JPanel();
         pbList = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btCreate = new javax.swing.JButton();
         lbicon1 = new javax.swing.JLabel();
+        btboom = new javax.swing.JButton();
+        bttyping = new javax.swing.JButton();
+        btlib = new javax.swing.JButton();
         pbWrite = new javax.swing.JPanel();
         btSub = new javax.swing.JButton();
         lbicon2 = new javax.swing.JLabel();
@@ -139,6 +142,36 @@ public class BoardList extends javax.swing.JFrame {
         });
 
         lbicon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/memo01.png"))); // NOI18N
+        
+        btboom.setBackground(new java.awt.Color(58, 62, 70));
+        btboom.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        btboom.setForeground(new java.awt.Color(196, 205, 216));
+        btboom.setText("지뢰찾기");
+        btboom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btboomActionPerformed(evt);
+            }
+        });
+
+        bttyping.setBackground(new java.awt.Color(58, 62, 70));
+        bttyping.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        bttyping.setForeground(new java.awt.Color(196, 205, 216));
+        bttyping.setText("코딩연습");
+        bttyping.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttypingActionPerformed(evt);
+            }
+        });
+
+        btlib.setBackground(new java.awt.Color(58, 62, 70));
+        btlib.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+        btlib.setForeground(new java.awt.Color(196, 205, 216));
+        btlib.setText("API 사전");
+        btlib.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btlibActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pbListLayout = new javax.swing.GroupLayout(pbList);
         pbList.setLayout(pbListLayout);
@@ -147,8 +180,15 @@ public class BoardList extends javax.swing.JFrame {
             .addGroup(pbListLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(pbListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btlib, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pbListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(pbListLayout.createSequentialGroup()
+                            .addComponent(btboom, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(bttyping, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(pbListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pbListLayout.createSequentialGroup()
@@ -159,10 +199,15 @@ public class BoardList extends javax.swing.JFrame {
         pbListLayout.setVerticalGroup(
             pbListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pbListLayout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addComponent(btlib, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pbListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btboom, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bttyping, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(pbListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pbListLayout.createSequentialGroup()
@@ -503,6 +548,21 @@ public class BoardList extends javax.swing.JFrame {
     	DefaultTableModel model = new DefaultTableModel(data, colHeader);
     	jTable1.setModel(model);
     }
+    
+    // 지뢰찾기 버튼
+    private void btboomActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+    
+    // 코딩 타자연습 버튼
+    private void bttypingActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    // API 사전 버튼
+    private void btlibActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+    }
 
     /**
      * @param args the command line arguments
@@ -530,12 +590,15 @@ public class BoardList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton btCreate;
-    private javax.swing.JButton btRe;
     private javax.swing.JButton btDel;
+    private javax.swing.JButton btRe;
     private javax.swing.JButton btRe_view;
     private javax.swing.JButton btReturn;
     private javax.swing.JButton btReturn2;
     private javax.swing.JButton btSub;
+    private javax.swing.JButton btboom;
+    private javax.swing.JButton btlib;
+    private javax.swing.JButton bttyping;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -555,5 +618,5 @@ public class BoardList extends javax.swing.JFrame {
     private javax.swing.JTextArea tades1;
     private javax.swing.JTextField tftitle;
     private javax.swing.JTextField tftitle1;
-    // End of variables declaration                   
+    // End of variables declaration                    
 }
