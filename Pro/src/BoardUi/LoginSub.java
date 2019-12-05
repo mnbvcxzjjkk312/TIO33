@@ -192,23 +192,21 @@ public class LoginSub extends javax.swing.JFrame {
     
     private void btidActionPerformed(java.awt.event.ActionEvent evt) {
     	BoardDAO bdao = new BoardDAO();
-    	Object ob = evt.getSource();
     	String idn = tfid.getText();
-    	if(ob==btid) {
-    		if(bdao.duplicationCheck(tfid.getText())) {
-    			JOptionPane.showMessageDialog(this, "아이듸가 존재합니다.");
-    			tfid.setText("");
-    			return;
-    		}
-    		else if(idn.length()<6) {
-        		JOptionPane.showMessageDialog(this, "아이듸가 너무 짧습니다.");
-        		tfid.setText("");
-        		return;
-        	}
-    		else  {
-    			JOptionPane.showMessageDialog(this, "아이듸 사용이 가능합니다!");
-        	}
-    	} 
+    	
+    	if(bdao.duplicationCheck(tfid.getText())) {
+    		JOptionPane.showMessageDialog(this, "아이듸가 존재합니다.");
+    		tfid.setText("");
+    		return;
+    	}
+    	else if(idn.length()<6) {
+        	JOptionPane.showMessageDialog(this, "아이듸가 너무 짧습니다.");
+        	tfid.setText("");
+        	return;
+        }
+    	else  {
+    		JOptionPane.showMessageDialog(this, "아이듸 사용이 가능합니다!");
+        }
     }
     
     private void btcancelActionPerformed(java.awt.event.ActionEvent evt) {                                       
