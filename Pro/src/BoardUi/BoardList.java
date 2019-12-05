@@ -521,8 +521,20 @@ public class BoardList extends javax.swing.JFrame {
 		
     }
     // 글 본문 창에서 글 삭제 버튼
-    private void btDelActionPerformed(java.awt.event.ActionEvent evt) {                                      
-    	
+    private void btDelActionPerformed(java.awt.event.ActionEvent evt) {
+    	int row = jTable1.getSelectedRow();
+    	Object objIdx = jTable1.getValueAt(row, 0);
+		Integer idx = (Integer) objIdx;
+		int yn = JOptionPane.showConfirmDialog(jTable1, "선택하신 글을 삭제할까요?");
+		if(yn == JOptionPane.YES_OPTION) 
+		{
+			int r = dao.delete(idx);
+		}
+		
+		jTable1.removeAll();
+        ArrayList<BoardVO> arr = dao.makeList();
+        showTable(arr);
+        card.show(jPanel2,"L");
     }
     
     // 글 본문 창에서 글목록으로 이동 버튼
