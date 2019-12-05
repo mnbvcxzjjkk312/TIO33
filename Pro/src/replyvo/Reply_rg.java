@@ -118,6 +118,9 @@ public class Reply_rg extends javax.swing.JFrame {
         //showMessage(str);
         JOptionPane.showMessageDialog(this, str);
         ta.setText(msg);
+        // [추가] 댓글창 초기화 및 닫기
+        ta.setText("");
+        this.dispose();
     }
 
     

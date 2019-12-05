@@ -267,6 +267,8 @@ public class LoginSub extends javax.swing.JFrame {
 			tfid.setText("");
 			tfpw.setText("");
 			tfmail.setText("");
+			// [추가] 가입완료 시 창닫기
+			this.dispose();
 		} 
 		catch (java.sql.SQLIntegrityConstraintViolationException e) 
 		{
