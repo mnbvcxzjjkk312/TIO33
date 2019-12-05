@@ -579,7 +579,6 @@ public class BoardList extends javax.swing.JFrame {
 	// 지뢰찾기 버튼
 	private void btboomActionPerformed(java.awt.event.ActionEvent evt) {
 		ms = new MineSweeper(10);
-		ms.main(null);
 	}
 
 	// 코딩 타자연습 버튼
