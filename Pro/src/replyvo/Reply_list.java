@@ -60,6 +60,7 @@ public class Reply_list extends javax.swing.JFrame {
         lbtitle.setText("´ñ±Û ¸ñ·Ï");
         lbtitle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
+        table.setFont(new java.awt.Font("±¼¸²", 1, 18)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
