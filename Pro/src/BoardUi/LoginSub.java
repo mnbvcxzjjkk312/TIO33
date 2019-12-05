@@ -84,7 +84,7 @@ public class LoginSub extends javax.swing.JFrame {
 
         lbmail.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
         lbmail.setForeground(new java.awt.Color(196, 205, 216));
-        lbmail.setText("이메일 주소");
+        lbmail.setText("닉네임");
         lbmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
         tfpw.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
