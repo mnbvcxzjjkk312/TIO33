@@ -1,7 +1,7 @@
 package BoardUi;
 
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
 import memvo.MEMBERVO;
 
 public class LoginSub extends javax.swing.JFrame {
@@ -191,23 +191,24 @@ public class LoginSub extends javax.swing.JFrame {
     }// </editor-fold>   
     
     // 중복확인 버튼
-    private void btidActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	BoardDAO bdao = new BoardDAO();
-    	String idn = tfid.getText();
-    	if(bdao.duplicationCheck(tfid.getText())) {
-    		JOptionPane.showMessageDialog(this, "아이디가 존재합니다.");
-    		tfid.setText("");
-    		return;
-    	}
-    	else if(idn.length()<6) {
-        		JOptionPane.showMessageDialog(this, "아이디가 너무 짧습니다.");
-        		tfid.setText("");
-        		return;
-        	}
-    	else  {
-    		JOptionPane.showMessageDialog(this, "아이디 사용이 가능합니다!");
-        	}
-    }       
+    boolean canUseId=false;
+	private void btidActionPerformed(java.awt.event.ActionEvent evt) {
+		BoardDAO bdao = new BoardDAO();
+		String idn = tfid.getText();
+
+		if (bdao.duplicationCheck(tfid.getText())) {
+			JOptionPane.showMessageDialog(this, "아이디가 존재합니다.");
+			tfid.setText("");
+			return;
+		} else if (idn.length() < 6) {
+			JOptionPane.showMessageDialog(this, "아이디가 너무 짧습니다.");
+			tfid.setText("");
+			return;
+		} else {
+			JOptionPane.showMessageDialog(this, "아이디 사용이 가능합니다!");
+			canUseId=true;
+		}
+	}
     
     // 취소 버튼. 현재 없음.
     private void btcancelActionPerformed(java.awt.event.ActionEvent evt) {                                       
@@ -217,41 +218,64 @@ public class LoginSub extends javax.swing.JFrame {
     }
     
     // 회원가입 버튼
-    private void btsignActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    private void btsignActionPerformed(java.awt.event.ActionEvent evt) 
+    {                                       
     	BoardDAO bdao = new BoardDAO();
-    	String iid = tfid.getText();
-        String ipw = tfpw.getText();
-        String iname = tfmail.getText();
-        if(bdao.duplicationCheck(iid)) {
-	        if(iid==null||iid.trim().isEmpty()||iid.trim().contentEquals(" ")) {
-	    		//null값과 빈문자열 체크
-	        	JOptionPane.showMessageDialog(this, "아이디를 입력하세요");
-	    		tfid.requestFocus();
-	    		return;
-	    	}
-	        else if (ipw==null||ipw.trim().isEmpty()||ipw.trim().contentEquals(" ")) {
-	        	JOptionPane.showMessageDialog(this, "비밀번호를 입력하세요");
-	    		tfpw.requestFocus();
-	    		return;
-	        }
-	        else if(iname==null||iname.trim().contentEquals(" ")||iname.trim().isEmpty()) {
-	        	JOptionPane.showMessageDialog(this, "이름을 입력하세요");
-	    		tfmail.requestFocus();
-	    		return;
-	        }
-        }
-        else {
-        	JOptionPane.showMessageDialog(this, "중복체크를 해주세요");
-        	return;
-        }
-    	MEMBERVO mvo = new MEMBERVO(0,iid,ipw,iname,0);
-    	//4) MemoDAO객체 생성 후 insertMemo()호출하기
-    	int cnt = bdao.insertMember(mvo);
-    	String str = (cnt>0)?"회원가입 성공":"회원가입 실패(알 수 없는 오류)";
-    	JOptionPane.showMessageDialog(this, "회원가입 완료 "+iname+"님 환영합니다!");
-    	tfid.setText("");
-    	tfpw.setText("");
-    	tfmail.setText("");
+		String iid = tfid.getText();
+		String ipw = tfpw.getText();
+		String iname = tfmail.getText();
+		if (bdao.duplicationCheck(iid)) {
+			if (iid == null || iid.trim().isEmpty() || iid.trim().contentEquals(" ")) 
+			{
+				// null값과 빈문자열 체크
+				JOptionPane.showMessageDialog(this, "아이디를 입력하세요");
+				tfid.requestFocus();
+				return;
+			} 
+			else if (ipw == null || ipw.trim().isEmpty() || ipw.trim().contentEquals(" ")) 
+			{
+				JOptionPane.showMessageDialog(this, "비밀번호를 입력하세요");
+				tfpw.requestFocus();
+				return;
+			} 
+			else if (iname == null || iname.trim().contentEquals(" ") || iname.trim().isEmpty()) 
+			{
+				JOptionPane.showMessageDialog(this, "이름을 입력하세요");
+				tfmail.requestFocus(); 
+				return;
+			}
+		} 
+		else 
+		{
+			if(!canUseId) 
+			{
+				JOptionPane.showMessageDialog(this, "아이디 중복체크를 해주세요");
+				return;
+			}
+		}
+		MEMBERVO mvo = new MEMBERVO(0, iid, ipw, iname, 0);
+		// 4) MemoDAO객체 생성 후 insertMemo()호출하기
+		int cnt;
+		try 
+		{
+			cnt = bdao.insertMember(mvo);
+			String str = (cnt > 0) ? "회원가입 성공" : "회원가입 실패(알 수 없는 오류)";
+			JOptionPane.showMessageDialog(this, "회원가입 완료 " + iname + "님 환영합니다!");
+			tfid.setText("");
+			tfpw.setText("");
+			tfmail.setText("");
+		} 
+		catch (java.sql.SQLIntegrityConstraintViolationException e) 
+		{
+			String str = "중복되는 아이디입니다. 아이디 중복 체크를 하세요";
+			JOptionPane.showMessageDialog(this, str);
+			tfid.setText("");
+		} 
+		catch(SQLException e) 
+		{
+			String str = e.getMessage();
+			JOptionPane.showMessageDialog(this, str);
+		}
     }                                      
 
     public static void main(String args[]) {

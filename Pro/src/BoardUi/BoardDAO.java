@@ -20,29 +20,9 @@ public class BoardDAO
 	String upw;
 
 	
-//	// 사용자 추가 메서드
-//	public int insertMember(MEMBERVO board) {
-//		try {
-//			con=DBConnection.getCon();
-//			String sql= "insert into member values(member_seq.nextval,?,?,?,?)";
-//			ps=con.prepareStatement(sql);
-//			ps.setString(1, board.getId());
-//			ps.setString(2, board.getPassword());
-//			ps.setString(3, board.getName());
-//			ps.setInt(4, board.getGrade());
-//
-//			int n = ps.executeUpdate();
-//			return n;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return -1;
-//		}finally {
-//			close();
-//		}
-//	}
-	
 	// 사용자 추가 메서드
-	public int insertMember(MEMBERVO member) {
+	public int insertMember(MEMBERVO member) throws SQLException 
+	{
 		try {
 			con=DBConnection.getCon();
 			String sql= "insert into member values(seq_member.nextval,?,?,?,1)";
@@ -53,8 +33,8 @@ public class BoardDAO
 			int n = ps.executeUpdate();
 			return n;
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
+			System.out.println(e);
+			throw e;
 		}finally {
 			close();
 		}
