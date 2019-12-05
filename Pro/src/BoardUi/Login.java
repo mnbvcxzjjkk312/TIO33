@@ -73,10 +73,10 @@ public class Login extends javax.swing.JFrame {
 
 		lbid.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
 		lbid.setForeground(new java.awt.Color(196, 205, 216));
-		lbid.setText("계정 이름");
+		lbid.setText("아이디");
 		lbid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
-		lbpw.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
+		lbpw.setFont(new java.awt.Font("굴림", 1, 17)); // NOI18N
 		lbpw.setForeground(new java.awt.Color(196, 205, 216));
 		lbpw.setText("비밀번호");
 		lbpw.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));

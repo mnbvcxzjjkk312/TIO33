@@ -58,7 +58,7 @@ public class FindUser extends javax.swing.JFrame {
 
 		lbmail.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
 		lbmail.setForeground(new java.awt.Color(196, 205, 216));
-		lbmail.setText("이메일 주소");
+		lbmail.setText("닉네임");
 		lbmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
 		lbtitle.setFont(new java.awt.Font("굴림", 1, 36)); // NOI18N
@@ -68,14 +68,14 @@ public class FindUser extends javax.swing.JFrame {
 
 		lbid.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
 		lbid.setForeground(new java.awt.Color(196, 205, 216));
-		lbid.setText("계정 이름");
+		lbid.setText("아이디");
 		lbid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
 		tfid_find.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
 		lbmail2.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
 		lbmail2.setForeground(new java.awt.Color(196, 205, 216));
-		lbmail2.setText("이메일 주소");
+		lbmail2.setText("닉네임");
 		lbmail2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
 		tfmail2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
