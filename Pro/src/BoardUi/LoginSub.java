@@ -34,6 +34,7 @@ public class LoginSub extends javax.swing.JFrame {
         p1.setBackground(new java.awt.Color(41, 45, 51));
 
         tfid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        tfid.setFont(new java.awt.Font("±¼¸²", 1, 18)); // NOI18N
 
         btcancel.setBackground(new java.awt.Color(58, 62, 70));
         btcancel.setFont(new java.awt.Font("±¼¸²", 1, 18)); // NOI18N
@@ -79,6 +80,7 @@ public class LoginSub extends javax.swing.JFrame {
         });
 
         tfmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        tfmail.setFont(new java.awt.Font("±¼¸²", 1, 18)); // NOI18N
 
         lbmail.setFont(new java.awt.Font("±¼¸²", 1, 18)); // NOI18N
         lbmail.setForeground(new java.awt.Color(196, 205, 216));
@@ -86,6 +88,7 @@ public class LoginSub extends javax.swing.JFrame {
         lbmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
         tfpw.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        tfpw.setFont(new java.awt.Font("±¼¸²", 1, 18)); // NOI18N
 
         lbtitle.setFont(new java.awt.Font("±¼¸²", 1, 36)); // NOI18N
         lbtitle.setForeground(new java.awt.Color(196, 205, 216));
