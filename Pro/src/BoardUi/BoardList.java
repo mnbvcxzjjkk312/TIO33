@@ -17,7 +17,7 @@ public class BoardList extends javax.swing.JFrame {
 	Login main;
 	Reply_rg re;
 	Reply_list rl;
-	Boom bm;
+	MineSweeper ms = new MineSweeper(10);
 	public static Integer idx;
 
 	// 12.04 추가한 코드. 생성자.
@@ -555,11 +555,8 @@ public class BoardList extends javax.swing.JFrame {
     }
     
     // 지뢰찾기 버튼
-    private void btboomActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	bm = new Boom();
-		bm.pack();
-		bm.setLocation(900, 150);
-		bm.setVisible(true);
+	private void btboomActionPerformed(java.awt.event.ActionEvent evt) {
+		ms.main(null);
     }                                      
     
     // 코딩 타자연습 버튼
