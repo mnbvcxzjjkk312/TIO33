@@ -182,11 +182,33 @@ public class FindUser extends javax.swing.JFrame {
 	}// </editor-fold>
 
 	private void btpw_findActionPerformed(java.awt.event.ActionEvent evt) {
-		JOptionPane.showMessageDialog(this, "비밀번호는 : [ 1234 ] 입니다.");
+		BoardDAO bdao = new BoardDAO();
+		String gname= tfmail2.getText();
+		String gid= tfid_find.getText();
+		if(gname == null || gname.trim().isEmpty()||gid == null || gid.trim().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "빈칸을 채워주세요.");
+		}
+		else {
+			String gpw = bdao.findMember2(gname, gid);
+			JOptionPane.showMessageDialog(this, gpw + "니다.");
+			tfmail2.setText("");
+			tfid_find.setText("");
+		}
+		
 	}
 
 	private void btid_findActionPerformed(java.awt.event.ActionEvent evt) {
-		JOptionPane.showMessageDialog(this, "아이디는 : [ tiger ] 입니다.");
+		BoardDAO bdao = new BoardDAO();
+		String gname= tfmail.getText();
+		if(gname == null || gname.trim().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "빈칸을 채워주세요.");
+		}
+		else {
+			String gpw = bdao.findMember(gname);
+			JOptionPane.showMessageDialog(this, gpw + "니다.");
+			tfmail.setText("");
+		}
+		
 	}
 
 	public static void main(String args[]) {

@@ -38,30 +38,30 @@ public class BoardDAO
 		}finally {
 			close();
 		}
-	}//----------------------------------------------		
+	}	
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 	//중복확인 메소드
-		public boolean duplicationCheck(String id) {
-			try {
-				con=DBConnection.getCon();
-				String sql= "select count(*) cnt from member where id=?";
-				ps=con.prepareStatement(sql);
-				ps.setString(1, id);
-				rs=ps.executeQuery();
-				if(rs.next()) {
-					int cnt =rs.getInt("cnt");
-					if(cnt > 0) {
-						return true;
-					}
+	public boolean duplicationCheck(String id) {
+		try {
+			con=DBConnection.getCon();
+			String sql= "select count(*) cnt from member where id=?";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				int cnt =rs.getInt("cnt");
+				if(cnt > 0) {
+					return true;
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close();
 			}
-			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
 		}
+		return false;
+	}
 //////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	
@@ -90,6 +90,53 @@ public class BoardDAO
 		}
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// ID를 찾아주는 메서드.
+	public String findMember(String name) {
+		try {
+			con=DBConnection.getCon();
+			String sql = "select id from member where name=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+			String gid = rs.getString("id");
+			return "아이디는 " + gid+"입";
+			}
+			else
+				return "그런 사용자는 없습";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "";
+		} finally {
+			close();
+		}
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	// 비밀 번호를 찾아주는 메서드.
+	public String findMember2(String name, String id) {
+		try {
+			con=DBConnection.getCon();
+			String sql = "select password from member where name=? and id =?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+			String gpw = rs.getString("password");
+			return "비밀번호는 "+gpw+"입";
+			}
+			else
+				return "아이디가 없거나 사용자 이름이 다릅";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "";
+		} finally {
+			close();
+		}
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////	
 
 	//보드에 글을 등록하는 메소드
 	public int AddBoard(BoardVO board){
@@ -124,7 +171,7 @@ public class BoardDAO
 			int grade = rs.getInt("grade");
 			MEMBERVO voTemp = new MEMBERVO(member_no, id, password, name, grade);
 			arr.add(voTemp);
-		}//while-------------
+		}
 		return arr;
 	}	
 //////////////////////////////////////////////////////////////////////////////////////////////	
