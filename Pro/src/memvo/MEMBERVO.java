@@ -53,6 +53,12 @@ public class MEMBERVO {
 		this.name = name;
 		this.grade = grade;
 	}
+	
+	public MEMBERVO(String id) {
+		super();
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
 		return "MEMBERVO [member_no=" + member_no + ", id=" + id + ", password="

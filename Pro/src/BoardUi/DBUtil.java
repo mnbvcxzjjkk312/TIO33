@@ -5,7 +5,7 @@ import java.sql.*;
 public class DBUtil {
 	
 	static String url="jdbc:oracle:thin:@localhost:1521:XE";
-	static String user="scott", pwd="tiger"; 
+	static String user="project3", pwd="1234"; 
 	
 	static {
 		try {

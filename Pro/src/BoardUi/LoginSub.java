@@ -2,6 +2,8 @@ package BoardUi;
 
 import javax.swing.JOptionPane;
 
+import memvo.MEMBERVO;
+
 public class LoginSub extends javax.swing.JFrame {
     // 회원 가입 창
     public LoginSub() {
@@ -188,19 +190,62 @@ public class LoginSub extends javax.swing.JFrame {
         pack();
     }// </editor-fold>   
     
-    private void btidActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "tfid.getText => DB에 있음?");
-    	JOptionPane.showMessageDialog(this, "DB => true || false ");
-    }       
+    private void btidActionPerformed(java.awt.event.ActionEvent evt) {
+    	BoardDAO bdao = new BoardDAO();
+    	Object ob = evt.getSource();
+    	String idn = tfid.getText();
+    	if(ob==btid) {
+    		if(bdao.duplicationCheck(tfid.getText())) {
+    			JOptionPane.showMessageDialog(this, "아이듸가 존재합니다.");
+    			tfid.setText("");
+    			return;
+    		}
+    		else if(idn.length()<6) {
+        		JOptionPane.showMessageDialog(this, "아이듸가 너무 짧습니다.");
+        		tfid.setText("");
+        		return;
+        	}
+    		else  {
+    			JOptionPane.showMessageDialog(this, "아이듸 사용이 가능합니다!");
+        	}
+    	} 
+    }
     
     private void btcancelActionPerformed(java.awt.event.ActionEvent evt) {                                       
     	JOptionPane.showMessageDialog(this, "창 닫기 메소드 진행..");
     	this.setVisible(false);
 		this.dispose();
-    }         
-    private void btsignActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
-    	JOptionPane.showMessageDialog(this, "UPDATE DB !! ");
+    }
+    
+    private void btsignActionPerformed(java.awt.event.ActionEvent evt) {
+    	BoardDAO mdao = new BoardDAO();
+    	String iid = tfid.getText();
+        String ipw = tfpw.getText();
+        String iname = tfmail.getText();
+        if(iid==null||iid.trim().isEmpty()||iid.trim().contentEquals(" ")) {
+    		//null값과 빈문자열 체크
+        	JOptionPane.showMessageDialog(this, "아이듸를 입력하세요");
+    		tfid.requestFocus();
+    		return;
+    	}
+        else if (ipw==null||ipw.trim().isEmpty()||ipw.trim().contentEquals(" ")) {
+        	JOptionPane.showMessageDialog(this, "비밀번호를 입력하세요");
+    		tfpw.requestFocus();
+    		return;
+        }
+        else if(iname==null||iname.trim().contentEquals(" ")||iname.trim().isEmpty()) {
+        	JOptionPane.showMessageDialog(this, "이름을 입력하세요");
+    		tfmail.requestFocus();
+    		return;
+        }
+    	MEMBERVO mvo = new MEMBERVO(0,iid,ipw,iname,0);
+    	//4) MemoDAO객체 생성 후 insertMemo()호출하기
+    	int cnt = mdao.insertMember(mvo);
+    	String str = (cnt>0)?"회원가입 성공":"회원가입 실패(알 수 없는 오류)";
+    	JOptionPane.showMessageDialog(this, "회원가입 완료 "+iname+"님 환영합니다!");
+    	tfid.setText("");
+    	tfpw.setText("");
+    	tfmail.setText("");
     }                                      
 
     public static void main(String args[]) {

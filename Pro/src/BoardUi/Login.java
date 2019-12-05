@@ -2,6 +2,8 @@ package BoardUi;
 
 import javax.swing.JOptionPane;
 
+import memvo.MEMBERVO;
+
 public class Login extends javax.swing.JFrame {
 	
 	// 로그인 화면
@@ -188,15 +190,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>
     
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {
-    	JOptionPane.showMessageDialog(this, "아이디 검사 코드 실행!");
-    	JOptionPane.showMessageDialog(this, "tfid.getText + tfpw.getText => DB");
-    	JOptionPane.showMessageDialog(this, "DB => true || false ");
-    	
-		bl.pack();
-		bl.setLocation(500, 100);
-		bl.setVisible(true);
-		this.setVisible(false);
-		this.dispose();
+    	BoardDAO bdao = new BoardDAO();
+    	String lid = tfid.getText();
+    	String lpw = tfpw.getText();
+    	bdao.Login(lid, lpw);
+    	if(lid.equals(bdao.uid)&&lpw.equals(bdao.upw)) {
+	    	JOptionPane.showMessageDialog(this, "환영합니다.");
+	    	bl.pack();
+	    	bl.setLocation(500, 100);
+	    	bl.setVisible(true);
+	    	this.setVisible(false);
+	    	this.dispose();
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "아이듸가 존재하지 않거나 비밀번호가 다릅니다.");
+    	}
 	}
 
     private void btSubActionPerformed(java.awt.event.ActionEvent evt) {                                      

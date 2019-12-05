@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import memvo.MEMBERVO;
+import java.util.Vector;
+
 import boardvo.BoardVO;
+import memvo.MEMBERVO;
 
 
 public class BoardDAO
@@ -15,16 +17,17 @@ public class BoardDAO
 	PreparedStatement ps;
 	ResultSet rs;
 	
+	String uid;
+	String upw;
 	
-	public int insertMember(MEMBERVO board) {
+	public int insertMember(MEMBERVO member) {
 		try {
-			con=DBUtil.getCon();
-			String sql= "insert into member values(member_seq.nextval,?,?,?,?)";
+			con=DBConnection.getCon();
+			String sql= "insert into member values(member_seq.nextval,?,?,?,1)";
 			ps=con.prepareStatement(sql);
-			ps.setString(1, board.getId());
-			ps.setString(2, board.getPassword());
-			ps.setString(3, board.getName());
-			ps.setInt(4, board.getGrade());
+			ps.setString(1, member.getId());
+			ps.setString(2, member.getPassword());
+			ps.setString(3, member.getName());
 			int n = ps.executeUpdate();
 			return n;
 		} catch (SQLException e) {
@@ -33,34 +36,59 @@ public class BoardDAO
 		}finally {
 			close();
 		}
-	}//--------------------------------------
+	}//----------------------------------------------
 	
+	//중복확인 메소드
+	public boolean duplicationCheck(String id) {
+		try {
+			con=DBConnection.getCon();
+			String sql= "select count(*) cnt from member where id=?";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				int cnt =rs.getInt("cnt");
+				if(cnt > 0) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return false;
+	}//----------------------------------------------
 	
 	
 	
 	//로그인 메소드
-	public ArrayList<MEMBERVO> Login(String Id){
+	public void Login(String Id, String Pwd){
 		try {
-			con=DBUtil.getCon();
-			String sql = "SELECT member_no, id, password, name, grade FROM board WHERE id = ?";
+			con=DBConnection.getCon();
+			String sql = "SELECT id, password FROM member WHERE id = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, Id);
 			rs = ps.executeQuery();
-			ArrayList<MEMBERVO> arr = makeList(rs);
-			return arr;
+			if(rs.next()) {
+				//아이디가 있는 경우
+				uid=rs.getString("id");
+				upw=rs.getString("password");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			//return 0;
 		} finally {
 			close();
 		}
 	}
 
-	
+
+
 	//보드를 만드는 메소드
 	public int AddBoard(BoardVO board){
 		try {
-			con=DBUtil.getCon();
+			con=DBConnection.getCon();
 			String sql = "INSERT INTO BOARD VALUES(board_seq.nextval,?,?,?,SYSDATE)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, board.getTitle());
@@ -127,20 +155,19 @@ public class BoardDAO
 		}
 	}
 	
-	public ArrayList<MEMBERVO> makeList(ResultSet rs)
-	throws SQLException{
-		ArrayList<MEMBERVO> arr = new ArrayList<>();
-		while(rs.next()) {
-			int member_no = rs.getInt("member_no");
-			String id = rs.getString("id");
-			String password = rs.getString("password");
-			String name = rs.getString("name");
-			int grade = rs.getInt("grade");
-			MEMBERVO voTemp = new MEMBERVO(member_no, id, password, name, grade);
-			arr.add(voTemp);
-		}//while-------------
-		return arr;
-	}
+	
+//	//모든 id를 저장하는 vector 메소드
+//	public Vector<MEMBERVO> makeList2(ResultSet rs)
+//	throws SQLException{
+//		Vector<MEMBERVO> arr = new Vector<>();
+//		while(rs.next()) {
+//			String id = rs.getString("id");
+//			MEMBERVO voTemp = new MEMBERVO(id);
+//			arr.add(voTemp);
+//		}//while-------------
+//		return arr;
+//	}
+	
 	
 	// DB에서 ROW를 가져오는 메서드.
 	public ArrayList<BoardVO> getList(ResultSet rs) throws SQLException
