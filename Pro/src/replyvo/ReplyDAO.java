@@ -65,6 +65,7 @@ public class ReplyDAO {
 			ps.setString(2,reply.getId());
 			// 12.04 추가한 코드. 리플에 글번호를 추가하여 해당 글에서만 리플이 보이도록 함.
 			ps.setInt(3,reply.getBoardNum());
+			System.out.println(reply.getBoardNum());
 			int n=ps.executeUpdate();
 			return n;
 		}catch(SQLException e) {
