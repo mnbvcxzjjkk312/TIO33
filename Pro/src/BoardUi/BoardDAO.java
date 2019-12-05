@@ -20,7 +20,7 @@ public class BoardDAO
 	String uid;
 	String upw;
 	
-	public int insertMember(MEMBERVO member) {
+	public int insertMember(MEMBERVO member) throws SQLException {
 		try {
 			con=DBConnection.getCon();
 			String sql= "insert into member values(seq_member.nextval,?,?,?,1)";
@@ -31,8 +31,10 @@ public class BoardDAO
 			int n = ps.executeUpdate();
 			return n;
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
+			System.out.println(e);
+			//e.printStackTrace();
+			throw e;
+			//return -1;
 		}finally {
 			close();
 		}
