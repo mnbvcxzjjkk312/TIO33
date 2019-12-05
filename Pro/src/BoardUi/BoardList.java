@@ -17,6 +17,7 @@ public class BoardList extends javax.swing.JFrame {
 	Login main;
 	Reply_rg re;
 	Reply_list rl;
+	Boom bm;
 	public static Integer idx;
 
 	// 12.04 추가한 코드. 생성자.
@@ -497,8 +498,12 @@ public class BoardList extends javax.swing.JFrame {
     	
         ArrayList<BoardVO> arr = dao.makeList();
         showTable(arr);
+        
+        // [추가] 글제목, 본문 데이터 초기화
+        tftitle.setText("");
+		tades.setText("");
     	
-        card.show(jPanel2,"L"); // 임시코드
+        card.show(jPanel2,"L");
     }                                     
     // 글쓰기 창에서 글목록으로 이동 버튼
     private void btReturnActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -563,7 +568,10 @@ public class BoardList extends javax.swing.JFrame {
     
     // 지뢰찾기 버튼
     private void btboomActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        // TODO add your handling code here:
+    	bm = new Boom();
+		bm.pack();
+		bm.setLocation(900, 150);
+		bm.setVisible(true);
     }                                      
     
     // 코딩 타자연습 버튼
