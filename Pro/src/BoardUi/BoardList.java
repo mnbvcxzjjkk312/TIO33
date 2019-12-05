@@ -72,6 +72,7 @@ public class BoardList extends javax.swing.JFrame {
 
         jTable1.setBackground(new java.awt.Color(41, 45, 51));
         jTable1.setForeground(new java.awt.Color(196, 205, 216));
+        jTable1.setFont(new java.awt.Font("±¼¸²", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -188,8 +189,11 @@ public class BoardList extends javax.swing.JFrame {
         lbicon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/memo01.png"))); // NOI18N
 
         p2.setBackground(new java.awt.Color(41, 45, 51));
+        
+        tftitle.setFont(new java.awt.Font("±¼¸²", 1, 20)); // NOI18N
 
         tades.setColumns(20);
+        tades.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         tades.setRows(5);
         tades.setPreferredSize(new java.awt.Dimension(225, 104));
         jScrollPane2.setViewportView(tades);
@@ -316,9 +320,11 @@ public class BoardList extends javax.swing.JFrame {
         p3.setBackground(new java.awt.Color(41, 45, 51));
 
         tftitle1.setEditable(false);
+        tftitle1.setFont(new java.awt.Font("±¼¸²", 1, 20)); // NOI18N
 
         tades1.setEditable(false);
         tades1.setColumns(20);
+        tades1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         tades1.setRows(5);
         tades1.setPreferredSize(new java.awt.Dimension(225, 104));
         jScrollPane3.setViewportView(tades1);
