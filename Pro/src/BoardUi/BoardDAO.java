@@ -20,17 +20,36 @@ public class BoardDAO
 	String upw;
 
 	
+//	// 사용자 추가 메서드
+//	public int insertMember(MEMBERVO board) {
+//		try {
+//			con=DBConnection.getCon();
+//			String sql= "insert into member values(member_seq.nextval,?,?,?,?)";
+//			ps=con.prepareStatement(sql);
+//			ps.setString(1, board.getId());
+//			ps.setString(2, board.getPassword());
+//			ps.setString(3, board.getName());
+//			ps.setInt(4, board.getGrade());
+//
+//			int n = ps.executeUpdate();
+//			return n;
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return -1;
+//		}finally {
+//			close();
+//		}
+//	}
+	
 	// 사용자 추가 메서드
-	public int insertMember(MEMBERVO board) {
+	public int insertMember(MEMBERVO member) {
 		try {
 			con=DBConnection.getCon();
-			String sql= "insert into member values(member_seq.nextval,?,?,?,?)";
+			String sql= "insert into member values(seq_member.nextval,?,?,?,1)";
 			ps=con.prepareStatement(sql);
-			ps.setString(1, board.getId());
-			ps.setString(2, board.getPassword());
-			ps.setString(3, board.getName());
-			ps.setInt(4, board.getGrade());
-
+			ps.setString(1, member.getId());
+			ps.setString(2, member.getPassword());
+			ps.setString(3, member.getName());
 			int n = ps.executeUpdate();
 			return n;
 		} catch (SQLException e) {
@@ -39,8 +58,32 @@ public class BoardDAO
 		}finally {
 			close();
 		}
-	}
+	}//----------------------------------------------		
 //////////////////////////////////////////////////////////////////////////////////////////////
+
+	//중복확인 메소드
+		public boolean duplicationCheck(String id) {
+			try {
+				con=DBConnection.getCon();
+				String sql= "select count(*) cnt from member where id=?";
+				ps=con.prepareStatement(sql);
+				ps.setString(1, id);
+				rs=ps.executeQuery();
+				if(rs.next()) {
+					int cnt =rs.getInt("cnt");
+					if(cnt > 0) {
+						return true;
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close();
+			}
+			return false;
+		}
+//////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	
 	//로그인하는 메소드
 	public void login(String id, String pwd)
@@ -73,7 +116,7 @@ public class BoardDAO
 		try {
 			ArrayList<BoardVO> ab = null;
 			con=DBConnection.getCon();
-			String sql = "INSERT INTO BOARD VALUES(board_seq.nextval,?,?,?,SYSDATE)";
+			String sql = "INSERT INTO BOARD VALUES(seq_board.nextval,?,?,?,SYSDATE)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, board.getTitle());
 			ps.setString(2, board.getContent());
