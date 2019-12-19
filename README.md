@@ -35,7 +35,8 @@
 
 
 4. 프로그램 구성
+<img src = "https://user-images.githubusercontent.com/41276647/71144802-a6468400-2262-11ea-82b5-a9b8a95db705.png" width = "90%"></img>
 
 
 5. 데이터베이스 구조
-
+<img src = "https://user-images.githubusercontent.com/41276647/71144828-b9f1ea80-2262-11ea-91e7-95f1f210891a.png" width = "90%"></img>
