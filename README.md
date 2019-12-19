@@ -39,7 +39,7 @@
 
 
 <h2>5. 데이터베이스 구조</h2>
-<img src = "https://user-images.githubusercontent.com/41276647/71144828-b9f1ea80-2262-11ea-91e7-95f1f210891a.png" width = "90%"></img>
+<img src = "https://user-images.githubusercontent.com/41276647/71147559-7f8d4b00-226c-11ea-915d-401e26d97e74.png" width = "90%"></img>
 
 
 <h2>6. 스크린 샷</h2>
