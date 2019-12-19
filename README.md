@@ -43,4 +43,4 @@
 
 
 <h2>6. 스크린 샷</h2>
-<img src = "https://user-images.githubusercontent.com/41276647/71145129-ccb8ef00-2263-11ea-9323-26969d6cf2c1.JPG" width = "90%></img>
+<img src = "https://user-images.githubusercontent.com/41276647/71145233-3802c100-2264-11ea-8bc7-8953c6b1fc9a.JPG" width = "90%"></img>
