@@ -20,7 +20,7 @@
 
 <h2>3. 개발 환경</h2>
  1) 사용 언어 : JAVA<br>
- 2) 사용 툴 : Eclipse, Oracle Database, Netbeans
+ 2) 사용 툴 : Eclipse, SQLDevelopter, MySQL Workbench, Netbeans
  
  
  <h2>3. 구현 기능 및 핵심 기술</h2>
