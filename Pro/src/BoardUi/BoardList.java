@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import boardvo.*;
 import memvo.*;
 import replyvo.*;
+import tischats.*;
 
 public class BoardList extends javax.swing.JFrame {
 
@@ -18,6 +19,7 @@ public class BoardList extends javax.swing.JFrame {
 	Reply_rg re;
 	Reply_list rl;
 	MineSweeper ms;
+	tisChatsGui tchat;
 	public static Integer idx;
 
 	// 12.04 추가한 코드. 생성자.
@@ -158,7 +160,7 @@ public class BoardList extends javax.swing.JFrame {
 		btlib.setBackground(new java.awt.Color(58, 62, 70));
 		btlib.setFont(new java.awt.Font("굴림", 1, 18)); // NOI18N
 		btlib.setForeground(new java.awt.Color(196, 205, 216));
-		btlib.setText("API 사전");
+		btlib.setText("코코아 채팅");
 		btlib.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btlibActionPerformed(evt);
@@ -586,9 +588,12 @@ public class BoardList extends javax.swing.JFrame {
 		// TODO add your handling code here:
 	}
 
-	// API 사전 버튼
+	// 채팅 버튼
 	private void btlibActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		tchat = new tisChatsGui();
+		tchat.pack();
+		tchat.setLocation(400, 200);
+		tchat.setVisible(true);
 	}
 
 	/**

@@ -16,7 +16,7 @@ public class MainUi extends JFrame {
 		
 		log = new Login();
 		log.pack();
-		log.setLocation(500, 100);
+		log.setLocation(500, 200);
 		log.setVisible(true);
 
 		// 모든 프로세스 종료
